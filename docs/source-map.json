@@ -1,0 +1,146 @@
+{
+  "baseline": "960ce8ec00cf724a7cae03e5ba09c4852c9ab54e",
+  "sdk_baseline": "d0484b8733eaa57d076f567ffa5e997b9564b5fa",
+  "symbols": {
+    "Kumwe\\App\\Application\\Authorization\\AuthorizationDecision": {
+      "target": "Kumwe\\Access\\AuthorizationDecision",
+      "file": "src/Application/Authorization/AuthorizationDecision.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\AuthorizationDecisionRecorder": {
+      "target": "Kumwe\\Access\\AuthorizationDecisionRecorder",
+      "file": "src/Application/Authorization/AuthorizationDecisionRecorder.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\AuthorizationDefinitionLifecycle": {
+      "target": "Kumwe\\Access\\AuthorizationDefinitionLifecycle",
+      "file": "src/Application/Authorization/AuthorizationDefinitionLifecycle.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\AuthorizationDenied": {
+      "target": "Kumwe\\Access\\AuthorizationDenied",
+      "file": "src/Application/Authorization/AuthorizationDenied.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\AuthorizationGateway": {
+      "target": "Kumwe\\Access\\AuthorizationGateway",
+      "file": "src/Application/Authorization/AuthorizationGateway.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\AuthorizationPolicyRegistry": {
+      "target": "Kumwe\\Access\\AuthorizationPolicyRegistry",
+      "file": "src/Application/Authorization/AuthorizationPolicyRegistry.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\AuthorizationResource": {
+      "target": "Kumwe\\Access\\AuthorizationResource",
+      "file": "src/Application/Authorization/AuthorizationResource.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\AuthorizationResourceOwnershipUnknown": {
+      "target": "Kumwe\\Access\\AuthorizationResourceOwnershipUnknown",
+      "file": "src/Application/Authorization/AuthorizationResourceOwnershipUnknown.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\CapabilityDefinition": {
+      "target": "Kumwe\\Access\\CapabilityDefinition",
+      "file": "src/Application/Authorization/CapabilityDefinition.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\CapabilityDefinitionRegistry": {
+      "target": "Kumwe\\Access\\CapabilityDefinitionRegistry",
+      "file": "src/Application/Authorization/CapabilityDefinitionRegistry.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\CompositeResourceOwnershipReferences": {
+      "target": "Kumwe\\Access\\CompositeResourceOwnershipReferences",
+      "file": "src/Application/Authorization/CompositeResourceOwnershipReferences.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\MembershipContextValidator": {
+      "target": "Kumwe\\Access\\MembershipContextValidator",
+      "file": "src/Application/Authorization/MembershipContextValidator.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\OwnershipNarrowingRefused": {
+      "target": "Kumwe\\Access\\OwnershipNarrowingRefused",
+      "file": "src/Application/Authorization/OwnershipNarrowingRefused.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\OwnershipNarrowingUnbounded": {
+      "target": "Kumwe\\Access\\OwnershipNarrowingUnbounded",
+      "file": "src/Application/Authorization/OwnershipNarrowingUnbounded.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\OwnershipScope": {
+      "target": "Kumwe\\Access\\OwnershipScope",
+      "file": "src/Application/Authorization/OwnershipScope.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\OwnershipScopeChangeRejected": {
+      "target": "Kumwe\\Access\\OwnershipScopeChangeRejected",
+      "file": "src/Application/Authorization/OwnershipScopeChangeRejected.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\OwnershipScopeLevel": {
+      "target": "Kumwe\\Access\\OwnershipScopeLevel",
+      "file": "src/Application/Authorization/OwnershipScopeLevel.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\OwnershipScopeNotPermitted": {
+      "target": "Kumwe\\Access\\OwnershipScopeNotPermitted",
+      "file": "src/Application/Authorization/OwnershipScopeNotPermitted.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\OwnershipScopeNotSiteBound": {
+      "target": "Kumwe\\Access\\OwnershipScopeNotSiteBound",
+      "file": "src/Application/Authorization/OwnershipScopeNotSiteBound.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\OwnershipScopeRule": {
+      "target": "Kumwe\\Access\\OwnershipScopeRule",
+      "file": "src/Application/Authorization/OwnershipScopeRule.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\ResourceOwnership": {
+      "target": "Kumwe\\Access\\ResourceOwnership",
+      "file": "src/Application/Authorization/ResourceOwnership.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\ResourceOwnershipReferences": {
+      "target": "Kumwe\\Access\\ResourceOwnershipReferences",
+      "file": "src/Application/Authorization/ResourceOwnershipReferences.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\ResourceOwnershipScopePolicy": {
+      "target": "Kumwe\\Access\\ResourceOwnershipScopePolicy",
+      "file": "src/Application/Authorization/ResourceOwnershipScopePolicy.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\ResourcePolicyDefinition": {
+      "target": "Kumwe\\Access\\ResourcePolicyDefinition",
+      "file": "src/Application/Authorization/ResourcePolicyDefinition.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\ResourcePolicyRegistry": {
+      "target": "Kumwe\\Access\\ResourcePolicyRegistry",
+      "file": "src/Application/Authorization/ResourcePolicyRegistry.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\ResourcePolicyTarget": {
+      "target": "Kumwe\\Access\\ResourcePolicyTarget",
+      "file": "src/Application/Authorization/ResourcePolicyTarget.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\ResourceSiteOwnership": {
+      "target": "Kumwe\\Access\\ResourceSiteOwnership",
+      "file": "src/Application/Authorization/ResourceSiteOwnership.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\ResourceSiteOwnershipConflict": {
+      "target": "Kumwe\\Access\\ResourceSiteOwnershipConflict",
+      "file": "src/Application/Authorization/ResourceSiteOwnershipConflict.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\ResourceSiteOwnershipWriter": {
+      "target": "Kumwe\\Access\\ResourceSiteOwnershipWriter",
+      "file": "src/Application/Authorization/ResourceSiteOwnershipWriter.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\SiteGroup": {
+      "target": "Kumwe\\Access\\SiteGroup",
+      "file": "src/Application/Authorization/SiteGroup.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\SiteGroupRegistry": {
+      "target": "Kumwe\\Access\\SiteGroupRegistry",
+      "file": "src/Application/Authorization/SiteGroupRegistry.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\SiteGroupUnknown": {
+      "target": "Kumwe\\Access\\SiteGroupUnknown",
+      "file": "src/Application/Authorization/SiteGroupUnknown.php"
+    },
+    "Kumwe\\App\\Application\\Authorization\\SiteGroupWriter": {
+      "target": "Kumwe\\Access\\SiteGroupWriter",
+      "file": "src/Application/Authorization/SiteGroupWriter.php"
+    },
+    "Kumwe\\App\\Identity\\Domain\\GrantScope": {
+      "target": "Kumwe\\Access\\GrantScope",
+      "file": "src/Identity/Domain/GrantScope.php"
+    },
+    "Kumwe\\Extension\\Spi\\Identity\\Domain\\Capability": {
+      "target": "Kumwe\\Access\\Capability",
+      "file": "vendor/kumwe/extension-sdk/src/Spi/Identity/Domain/Capability.php"
+    }
+  }
+}
