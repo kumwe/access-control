@@ -1812,3 +1812,30 @@ Create or replace one declaration and its complete membership.
 
 @since  0.1.0
 
+
+## `Kumwe\Access\MembershipDirectory`
+
+Host-implemented interface extending `MembershipContextValidator`. It is owned by
+Access and used by Approval, authorization and host administration; it constructs
+no identity, opens no storage, and provides no default authority implementation.
+
+- `resolve(string $subjectId, SiteContext $site, string $organizationIdentifier,
+  ?string $workspaceIdentifier = null, bool $lock = false): ?MembershipContext`
+  resolves a live versioned membership only for the exact authenticated actor, site,
+  organization and optional workspace. Inputs select existing authority; they grant
+  none. Returns null without exposing which membership check failed. With `lock=true`,
+  the host must hold required membership locks in the surrounding mutation transaction.
+- `current(string $subjectId, SiteContext $site, MembershipContext $membership, bool $lock = false): bool`
+  returns true only while status, time bounds, workspace assignment, membership version
+  and policy generation all match live state. Stale or unverifiable snapshots fail
+  closed. This signature exactly refines the inherited freshness port.
+- `selections(string $subjectId, SiteContext $site): array` returns only active
+  organization/workspace choices for that actor and site, as a list of
+  `{organization: string, workspace: ?string, membership_id: string,
+  membership_version: int, policy_generation: int}` records. Results are server-derived.
+
+All methods preserve explicit actor/site inputs. Backends own connection safety,
+transaction lifetime, clock evaluation, lock acquisition and infrastructure errors;
+callers must not convert backend failures into permission grants. The interface
+has no mutable state, global actor, credential checks, precision conversion or
+serialization behavior. It is deliberately absent from default container bindings.

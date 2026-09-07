@@ -31,8 +31,8 @@ target:
   repository: "https://github.com/kumwe/access-control"
   artifact_identity: "kumwe/access-control"
   canonical_namespace_or_abi: "Kumwe\\Access"
-  branch: "agent/extract-access-control-20260907"
-  pull_request: "https://github.com/kumwe/access-control/pull/1"
+  branch: "agent/access-membership-di-completion"
+  pull_request: "https://github.com/kumwe/access-control/pull/4"
 ownership:
   responsibility: "Reusable authorization decisions, policies, scopes, ownership, registries and ports."
   non_responsibilities:
@@ -45,9 +45,9 @@ ownership:
   next_consumer: "kumwe/extension-sdk"
   public_manifests:
     - path: resources/public-api/v1.json
-      sha256: "1e944e5de572ffdf896151876ddd6fd8c0a23aedede10fa8891e1ab5a7784f4a"
+      sha256: "cbe368cbf9bd9ba4a746aca08be1446f4d6c1b584944b9ba698917c6af40a502"
     - path: resources/capabilities/v1.json
-      sha256: "dfb49585e0e62e70525cfc3afa8186991aa78ef73b2ee71dd70eaff6cd8462eb"
+      sha256: "69ab2fa6c8202f726ebdf5a54191aec6d89411bf617d656470435721e3284ec2"
     - path: resources/service-map/v1.json
       sha256: "05309b1f43fe60410b256d851c373e54dd83ae3456e6b65fbefb6efa850e57de"
   intentionally_excluded:
@@ -1192,3 +1192,25 @@ hand-edited lockfiles.
 PHP 8.5 package tests, strict static analysis, coding standards, manifest/schema/API checks, Composer audit and real
 ZIP dependency consumer are the required final gates. The PR records their observed final-head outcomes externally. No
 future commit/tag/archive identity or attestation is fabricated in this handoff.
+
+## Membership and consumer-container completion (NRM-2026-023)
+
+This successor checkpoint is tracked by PR #4. The original KUMWE-MIG-2026-009
+source provenance above remains valid for its extracted classes. The additive
+MembershipDirectory extraction was checked at App 24ecf956423c18933e824b43cea1bfb9127a79a9.
+The exact symbol, file and consumer inventory is docs/membership-source-map.json.
+Replace its old App FQCN with Kumwe\Access\MembershipDirectory in every listed
+consumer only after a verified successor release. Delete the old interface then;
+retain DoctrineMembershipDirectory and all DB/current-membership authority tests.
+No implementation is copied to Approval.
+
+MembershipDirectoryTest owns inherited signature/default conformance and absence
+of an implicit authority binding. Real ServiceManager integration now resolves
+every declared service from the no-dev archive consumer, verifies shared lifetime,
+checks missing configuration refusals and rejects an implicit gateway. The host
+consumer explicitly requires Laminas; it remains outside portable runtime dependencies.
+
+A new immutable version record must be selected once upstream release evidence is
+verified. The existing 0.1.0 manifest release coordinate is development metadata,
+not a claim that the additional API is present in an existing released artifact.
+Final release identity and all digest attestations remain external.

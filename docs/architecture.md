@@ -41,3 +41,15 @@ DB transactions, clocks or audit side effects exist. Shared registries belong to
 generation. Rebuild that generation on lifecycle changes; no cross-process synchronization or compare-and-set
 guarantee is provided by the in-memory registries. Ownership equality intentionally compares level/id, not current
 membership snapshot.
+
+## AC-008: Membership directory ownership completion
+
+The v2 catalog assigns MembershipDirectory to Access. Source closure at App master
+was rechecked: it extends MembershipContextValidator and refers only to membership
+and site Context values. Move the exact port to Kumwe\Access without a default
+implementation. This is additive ownership completion, not a new authority model.
+DoctrineMembershipDirectory, authentication, current membership storage, lock scope
+and credential selection remain App responsibilities. Approval imports this port;
+it must not redeclare it. Consumers of the original App port move only after a
+verified Access successor is available. The original extraction baseline remains
+recorded; this addition has its own source and consumer inventory.

@@ -349,6 +349,14 @@
       "boundary": [
         "Kumwe\\Access\\Tests\\Case\\PortTest::testSiteGroupPortConformance"
       ]
+    },
+    "Kumwe\\Access\\MembershipDirectory": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\MembershipDirectoryTest::testMembershipDirectorySignatureConformance"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\MembershipDirectoryTest::testMembershipAuthorityIsNeverRegisteredByDefault"
+      ]
     }
   },
   "conformance": {

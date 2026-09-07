@@ -34,9 +34,16 @@ $manifest = json_decode(
     512,
     JSON_THROW_ON_ERROR,
 );
+if (!is_array($manifest) || !is_array($manifest['factories'] ?? null)) {
+    throw new RuntimeException('The shipped service map has no factory list.');
+}
 foreach ($manifest['factories'] as $entry) {
-    $service = $container->get($entry['service']);
-    if (!$service instanceof $entry['service'] || $container->get($entry['service']) !== $service) {
+    if (!is_array($entry) || !is_string($entry['service'] ?? null) || !class_exists($entry['service'])) {
+        throw new RuntimeException('The shipped service map contains an invalid service class.');
+    }
+    $serviceClass = $entry['service'];
+    $service = $container->get($serviceClass);
+    if (!$service instanceof $serviceClass || $container->get($serviceClass) !== $service) {
         throw new RuntimeException('A declared shared service does not resolve with its documented lifetime.');
     }
 }

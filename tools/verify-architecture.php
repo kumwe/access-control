@@ -35,6 +35,7 @@ $layers = [
         'DecisionState',
         'GrantScope',
         'MembershipContextValidator',
+        'MembershipDirectory',
         'MembershipRequirement',
         'OwnershipNarrowingRefused',
         'OwnershipNarrowingUnbounded',

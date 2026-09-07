@@ -1382,6 +1382,121 @@
             },
             "deprecated": null
         },
+        "Kumwe\\Access\\MembershipDirectory": {
+            "kind": "interface",
+            "stability": "stable",
+            "file": "src/MembershipDirectory.php",
+            "abstract": false,
+            "final": false,
+            "readonly": false,
+            "parent": null,
+            "interfaces": [
+                "Kumwe\\Access\\MembershipContextValidator"
+            ],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "current": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "subjectId",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "site",
+                            "type": "Kumwe\\Context\\Value\\SiteContext",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "membership",
+                            "type": "Kumwe\\Context\\Value\\MembershipContext",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "lock",
+                            "type": "bool",
+                            "optional": true,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                },
+                "resolve": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "subjectId",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "site",
+                            "type": "Kumwe\\Context\\Value\\SiteContext",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "organizationIdentifier",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "workspaceIdentifier",
+                            "type": "?string",
+                            "optional": true,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "lock",
+                            "type": "bool",
+                            "optional": true,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "?Kumwe\\Context\\Value\\MembershipContext"
+                },
+                "selections": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "subjectId",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "site",
+                            "type": "Kumwe\\Context\\Value\\SiteContext",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "array"
+                }
+            },
+            "deprecated": null
+        },
         "Kumwe\\Access\\MembershipRequirement": {
             "kind": "class",
             "stability": "stable",
@@ -2770,6 +2885,7 @@
         "Kumwe\\Access\\AuthorizationDecisionRecorder",
         "Kumwe\\Access\\AuthorizationGateway",
         "Kumwe\\Access\\MembershipContextValidator",
+        "Kumwe\\Access\\MembershipDirectory",
         "Kumwe\\Access\\ResourceOwnershipReferences",
         "Kumwe\\Access\\ResourceSiteOwnership",
         "Kumwe\\Access\\ResourceSiteOwnershipWriter",
