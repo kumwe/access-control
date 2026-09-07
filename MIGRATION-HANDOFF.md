@@ -1166,7 +1166,8 @@ initial-extraction publication blockers. No independent attestation is fabricate
 
 The source/consumer mappings above remain the adoption inventory. The later MembershipDirectory extraction is
 recorded in docs/membership-source-map.json at App 24ecf956423c18933e824b43cea1bfb9127a79a9. Its canonical owner is
-Kumwe\Access\MembershipDirectory; retain the host DoctrineMembershipDirectory and live membership tests. Compare every mapped file and public signature
+Kumwe\Access\MembershipDirectory; retain the host DoctrineMembershipDirectory and live membership tests.
+Compare every mapped file and public signature
 against the recorded full App baseline and current App before consumer changes. Any newer portable behavior goes
 upstream first. Preserve App authority, adapters and workflows.
 
