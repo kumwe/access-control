@@ -1,0 +1,43 @@
+{
+  "schema": "kumwe-package-service-map/v1",
+  "package": "kumwe/access-control",
+  "release": "0.1.0",
+  "config_provider": "Kumwe\\Access\\ConfigProvider",
+  "provider_absence_reason": null,
+  "factories": [
+    {
+      "service": "Kumwe\\Access\\AuthorizationPolicyRegistry",
+      "factory": "Kumwe\\Access\\Container\\AuthorizationPolicyRegistryFactory",
+      "lifetime": "shared"
+    },
+    {
+      "service": "Kumwe\\Access\\ResourceOwnershipScopePolicy",
+      "factory": "Kumwe\\Access\\Container\\ResourceOwnershipScopePolicyFactory",
+      "lifetime": "shared"
+    },
+    {
+      "service": "Kumwe\\Access\\CompositeResourceOwnershipReferences",
+      "factory": "Kumwe\\Access\\Container\\CompositeResourceOwnershipReferencesFactory",
+      "lifetime": "shared"
+    }
+  ],
+  "aliases": [],
+  "delegators": [],
+  "configuration_keys": [
+    {
+      "key": "kumwe.access.membership_resource_types",
+      "default": null,
+      "description": "Required explicit list of resource types requiring membership. No default."
+    },
+    {
+      "key": "kumwe.access.reserved_ownership_rules",
+      "default": null,
+      "description": "Required category-to-OwnershipScopeRule wire value map. No default."
+    },
+    {
+      "key": "kumwe.access.reference_inspectors",
+      "default": null,
+      "description": "Required ordered list of explicit inspector service IDs, at most64. No default."
+    }
+  ]
+}

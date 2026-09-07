@@ -1,0 +1,22 @@
+{
+  "schema": "kumwe-access-decision-conformance/v1",
+  "profile": "deny-step-up-allow-abstain/v1",
+  "pairs": [
+    ["allow", "allow", "allow"],
+    ["allow", "deny", "deny"],
+    ["allow", "step_up", "step_up"],
+    ["allow", "not_applicable", "allow"],
+    ["deny", "allow", "deny"],
+    ["deny", "deny", "deny"],
+    ["deny", "step_up", "deny"],
+    ["deny", "not_applicable", "deny"],
+    ["step_up", "allow", "step_up"],
+    ["step_up", "deny", "deny"],
+    ["step_up", "step_up", "step_up"],
+    ["step_up", "not_applicable", "step_up"],
+    ["not_applicable", "allow", "allow"],
+    ["not_applicable", "deny", "deny"],
+    ["not_applicable", "step_up", "step_up"],
+    ["not_applicable", "not_applicable", "not_applicable"]
+  ]
+}

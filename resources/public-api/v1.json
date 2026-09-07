@@ -1,0 +1,2780 @@
+{
+    "schema": "kumwe-package-public-api/v1",
+    "package": "kumwe/access-control",
+    "release": "0.1.0",
+    "namespace": "Kumwe\\Access\\",
+    "symbols": {
+        "Kumwe\\Access\\AuthorizationDecision": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/AuthorizationDecision.php",
+            "abstract": false,
+            "final": true,
+            "readonly": true,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {
+                "allowed": {
+                    "type": "bool",
+                    "static": false,
+                    "readonly": true
+                },
+                "policy": {
+                    "type": "string",
+                    "static": false,
+                    "readonly": true
+                },
+                "reason": {
+                    "type": "string",
+                    "static": false,
+                    "readonly": true
+                },
+                "state": {
+                    "type": "Kumwe\\Access\\DecisionState",
+                    "static": false,
+                    "readonly": true
+                }
+            },
+            "methods": {
+                "__construct": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "state",
+                            "type": "Kumwe\\Access\\DecisionState",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "policy",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "reason",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": null
+                },
+                "toArray": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "array"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\AuthorizationDecisionRecorder": {
+            "kind": "interface",
+            "stability": "stable",
+            "file": "src/AuthorizationDecisionRecorder.php",
+            "abstract": false,
+            "final": false,
+            "readonly": false,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "record": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "context",
+                            "type": "Kumwe\\Context\\Value\\ExecutionContext",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "action",
+                            "type": "Kumwe\\Access\\Capability",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "resource",
+                            "type": "Kumwe\\Access\\AuthorizationResource",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "decision",
+                            "type": "Kumwe\\Access\\AuthorizationDecision",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "void"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\AuthorizationDefinitionLifecycle": {
+            "kind": "enum",
+            "stability": "stable",
+            "file": "src/AuthorizationDefinitionLifecycle.php",
+            "abstract": false,
+            "final": true,
+            "readonly": false,
+            "parent": null,
+            "interfaces": [],
+            "constants": {
+                "Active": {
+                    "type": "string"
+                },
+                "Deprecated": {
+                    "type": "string"
+                },
+                "Disabled": {
+                    "type": "string"
+                },
+                "Retired": {
+                    "type": "string"
+                }
+            },
+            "properties": {},
+            "methods": {
+                "enforceable": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "bool"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\AuthorizationDenied": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/AuthorizationDenied.php",
+            "abstract": false,
+            "final": true,
+            "readonly": false,
+            "parent": "DomainException",
+            "interfaces": [
+                "Stringable",
+                "Throwable"
+            ],
+            "constants": {},
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "static": false,
+                    "readonly": true
+                },
+                "policy": {
+                    "type": "string",
+                    "static": false,
+                    "readonly": true
+                },
+                "reason": {
+                    "type": "string",
+                    "static": false,
+                    "readonly": true
+                },
+                "resourceIdentifier": {
+                    "type": "string",
+                    "static": false,
+                    "readonly": true
+                },
+                "resourceType": {
+                    "type": "string",
+                    "static": false,
+                    "readonly": true
+                },
+                "siteIdentifier": {
+                    "type": "string",
+                    "static": false,
+                    "readonly": true
+                },
+                "subject": {
+                    "type": "string",
+                    "static": false,
+                    "readonly": true
+                }
+            },
+            "methods": {
+                "__construct": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "subject",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "action",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "resourceType",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "resourceIdentifier",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "siteIdentifier",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "policy",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "reason",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": null
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\AuthorizationGateway": {
+            "kind": "interface",
+            "stability": "stable",
+            "file": "src/AuthorizationGateway.php",
+            "abstract": false,
+            "final": false,
+            "readonly": false,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "assertAllowed": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "context",
+                            "type": "Kumwe\\Context\\Value\\ExecutionContext",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "action",
+                            "type": "Kumwe\\Access\\Capability",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "resource",
+                            "type": "Kumwe\\Access\\AuthorizationResource",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "void"
+                },
+                "assertCanDelegate": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "context",
+                            "type": "Kumwe\\Context\\Value\\ExecutionContext",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "action",
+                            "type": "Kumwe\\Access\\Capability",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "scope",
+                            "type": "Kumwe\\Access\\GrantScope",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "void"
+                },
+                "decide": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "context",
+                            "type": "Kumwe\\Context\\Value\\ExecutionContext",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "action",
+                            "type": "Kumwe\\Access\\Capability",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "resource",
+                            "type": "Kumwe\\Access\\AuthorizationResource",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "Kumwe\\Access\\AuthorizationDecision"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\AuthorizationPolicyRegistry": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/AuthorizationPolicyRegistry.php",
+            "abstract": false,
+            "final": true,
+            "readonly": true,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "__construct": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "membershipRequirement",
+                            "type": "Kumwe\\Access\\MembershipRequirement",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": null
+                },
+                "allowsHumanGrant": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "action",
+                            "type": "Kumwe\\Access\\Capability",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                },
+                "allowsSystemIdentity": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "action",
+                            "type": "Kumwe\\Access\\Capability",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "resource",
+                            "type": "Kumwe\\Access\\AuthorizationResource",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "identity",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                },
+                "capability": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "capability",
+                            "type": "Kumwe\\Access\\Capability",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "?Kumwe\\Access\\CapabilityDefinition"
+                },
+                "capabilityDefinitions": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "Kumwe\\Access\\CapabilityDefinitionRegistry"
+                },
+                "registerCapability": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "definition",
+                            "type": "Kumwe\\Access\\CapabilityDefinition",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "void"
+                },
+                "registerResourcePolicy": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "definition",
+                            "type": "Kumwe\\Access\\ResourcePolicyDefinition",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "void"
+                },
+                "removeOwner": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "owner",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "void"
+                },
+                "requiresGlobalGrant": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "action",
+                            "type": "Kumwe\\Access\\Capability",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "resource",
+                            "type": "Kumwe\\Access\\AuthorizationResource",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                },
+                "requiresMembershipContext": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "action",
+                            "type": "Kumwe\\Access\\Capability",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                },
+                "resourcePolicies": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "Kumwe\\Access\\ResourcePolicyRegistry"
+                },
+                "resourcePolicy": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "action",
+                            "type": "Kumwe\\Access\\Capability",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "resource",
+                            "type": "Kumwe\\Access\\AuthorizationResource",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "?Kumwe\\Access\\ResourcePolicyDefinition"
+                },
+                "supports": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "action",
+                            "type": "Kumwe\\Access\\Capability",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "resource",
+                            "type": "Kumwe\\Access\\AuthorizationResource",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                },
+                "supportsDelegation": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "action",
+                            "type": "Kumwe\\Access\\Capability",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "scope",
+                            "type": "Kumwe\\Access\\GrantScope",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\AuthorizationResource": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/AuthorizationResource.php",
+            "abstract": false,
+            "final": true,
+            "readonly": true,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "collection": {
+                    "visibility": "public",
+                    "static": true,
+                    "parameters": [
+                        {
+                            "name": "type",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "Kumwe\\Access\\AuthorizationResource"
+                },
+                "identifier": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "string"
+                },
+                "item": {
+                    "visibility": "public",
+                    "static": true,
+                    "parameters": [
+                        {
+                            "name": "type",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "identifier",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "Kumwe\\Access\\AuthorizationResource"
+                },
+                "type": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "string"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\AuthorizationResourceOwnershipUnknown": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/AuthorizationResourceOwnershipUnknown.php",
+            "abstract": false,
+            "final": true,
+            "readonly": false,
+            "parent": "RuntimeException",
+            "interfaces": [
+                "Stringable",
+                "Throwable"
+            ],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "__construct": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "resource",
+                            "type": "Kumwe\\Access\\AuthorizationResource",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": null
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\Capability": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/Capability.php",
+            "abstract": false,
+            "final": true,
+            "readonly": true,
+            "parent": null,
+            "interfaces": [
+                "Stringable"
+            ],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "__toString": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "string"
+                },
+                "equals": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "other",
+                            "type": "Kumwe\\Access\\Capability",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                },
+                "fromString": {
+                    "visibility": "public",
+                    "static": true,
+                    "parameters": [
+                        {
+                            "name": "value",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "Kumwe\\Access\\Capability"
+                },
+                "value": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "string"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\CapabilityDefinition": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/CapabilityDefinition.php",
+            "abstract": false,
+            "final": true,
+            "readonly": true,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {
+                "allowedScopes": {
+                    "type": "array",
+                    "static": false,
+                    "readonly": true
+                },
+                "capability": {
+                    "type": "Kumwe\\Access\\Capability",
+                    "static": false,
+                    "readonly": true
+                },
+                "definitionVersion": {
+                    "type": "int",
+                    "static": false,
+                    "readonly": true
+                },
+                "delegatable": {
+                    "type": "bool",
+                    "static": false,
+                    "readonly": true
+                },
+                "highImpact": {
+                    "type": "bool",
+                    "static": false,
+                    "readonly": true
+                },
+                "lifecycle": {
+                    "type": "Kumwe\\Access\\AuthorizationDefinitionLifecycle",
+                    "static": false,
+                    "readonly": true
+                },
+                "owner": {
+                    "type": "string",
+                    "static": false,
+                    "readonly": true
+                }
+            },
+            "methods": {
+                "__construct": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "capability",
+                            "type": "Kumwe\\Access\\Capability",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "owner",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "allowedScopes",
+                            "type": "iterable",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "delegatable",
+                            "type": "bool",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "highImpact",
+                            "type": "bool",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "lifecycle",
+                            "type": "Kumwe\\Access\\AuthorizationDefinitionLifecycle",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "definitionVersion",
+                            "type": "int",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": null
+                },
+                "allowsDelegation": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "scope",
+                            "type": "Kumwe\\Access\\GrantScope",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                },
+                "allowsHumanGrant": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "bool"
+                },
+                "assertOwnedIdentifier": {
+                    "visibility": "public",
+                    "static": true,
+                    "parameters": [
+                        {
+                            "name": "owner",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "identifier",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "kind",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "void"
+                },
+                "assertOwner": {
+                    "visibility": "public",
+                    "static": true,
+                    "parameters": [
+                        {
+                            "name": "owner",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "void"
+                },
+                "enforceable": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "bool"
+                },
+                "toArray": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "array"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\CapabilityDefinitionRegistry": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/CapabilityDefinitionRegistry.php",
+            "abstract": false,
+            "final": true,
+            "readonly": false,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "definition": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "capability",
+                            "type": "Kumwe\\Access\\Capability",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "?Kumwe\\Access\\CapabilityDefinition"
+                },
+                "isOwnedBy": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "capability",
+                            "type": "Kumwe\\Access\\Capability",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "owner",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                },
+                "ownedBy": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "owner",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "array"
+                },
+                "register": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "definition",
+                            "type": "Kumwe\\Access\\CapabilityDefinition",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "void"
+                },
+                "removeOwner": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "owner",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "void"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\CompositeResourceOwnershipReferences": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/CompositeResourceOwnershipReferences.php",
+            "abstract": false,
+            "final": true,
+            "readonly": true,
+            "parent": null,
+            "interfaces": [
+                "Kumwe\\Access\\ResourceOwnershipReferences"
+            ],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "__construct": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "inspectors",
+                            "type": "iterable",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": null
+                },
+                "sitesReferencing": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "resource",
+                            "type": "Kumwe\\Access\\AuthorizationResource",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "sites",
+                            "type": "array",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "array"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\ConfigProvider": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/ConfigProvider.php",
+            "abstract": false,
+            "final": true,
+            "readonly": false,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "__invoke": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "array"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\Container\\AuthorizationPolicyRegistryFactory": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/Container/AuthorizationPolicyRegistryFactory.php",
+            "abstract": false,
+            "final": true,
+            "readonly": false,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "__invoke": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "container",
+                            "type": "Psr\\Container\\ContainerInterface",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "Kumwe\\Access\\AuthorizationPolicyRegistry"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\Container\\CompositeResourceOwnershipReferencesFactory": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/Container/CompositeResourceOwnershipReferencesFactory.php",
+            "abstract": false,
+            "final": true,
+            "readonly": false,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "__invoke": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "container",
+                            "type": "Psr\\Container\\ContainerInterface",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "Kumwe\\Access\\CompositeResourceOwnershipReferences"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\Container\\ResourceOwnershipScopePolicyFactory": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/Container/ResourceOwnershipScopePolicyFactory.php",
+            "abstract": false,
+            "final": true,
+            "readonly": false,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "__invoke": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "container",
+                            "type": "Psr\\Container\\ContainerInterface",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "Kumwe\\Access\\ResourceOwnershipScopePolicy"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\DecisionCombiner": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/DecisionCombiner.php",
+            "abstract": false,
+            "final": true,
+            "readonly": false,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "combine": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "decisions",
+                            "type": "iterable",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "Kumwe\\Access\\AuthorizationDecision"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\DecisionState": {
+            "kind": "enum",
+            "stability": "stable",
+            "file": "src/DecisionState.php",
+            "abstract": false,
+            "final": true,
+            "readonly": false,
+            "parent": null,
+            "interfaces": [],
+            "constants": {
+                "Allow": {
+                    "type": "string"
+                },
+                "Deny": {
+                    "type": "string"
+                },
+                "NotApplicable": {
+                    "type": "string"
+                },
+                "StepUp": {
+                    "type": "string"
+                }
+            },
+            "properties": {},
+            "methods": {},
+            "deprecated": null
+        },
+        "Kumwe\\Access\\GrantScope": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/GrantScope.php",
+            "abstract": false,
+            "final": true,
+            "readonly": true,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "covers": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "requested",
+                            "type": "Kumwe\\Access\\GrantScope",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                },
+                "equals": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "other",
+                            "type": "Kumwe\\Access\\GrantScope",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                },
+                "global": {
+                    "visibility": "public",
+                    "static": true,
+                    "parameters": [],
+                    "return": "Kumwe\\Access\\GrantScope"
+                },
+                "identifier": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "?string"
+                },
+                "isGlobal": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "bool"
+                },
+                "named": {
+                    "visibility": "public",
+                    "static": true,
+                    "parameters": [
+                        {
+                            "name": "type",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "identifier",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "Kumwe\\Access\\GrantScope"
+                },
+                "type": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "string"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\MembershipContextValidator": {
+            "kind": "interface",
+            "stability": "stable",
+            "file": "src/MembershipContextValidator.php",
+            "abstract": false,
+            "final": false,
+            "readonly": false,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "current": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "subjectId",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "site",
+                            "type": "Kumwe\\Context\\Value\\SiteContext",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "membership",
+                            "type": "Kumwe\\Context\\Value\\MembershipContext",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "lock",
+                            "type": "bool",
+                            "optional": true,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\MembershipRequirement": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/MembershipRequirement.php",
+            "abstract": false,
+            "final": true,
+            "readonly": true,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {
+                "resourceTypes": {
+                    "type": "array",
+                    "static": false,
+                    "readonly": true
+                }
+            },
+            "methods": {
+                "__construct": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "resourceTypes",
+                            "type": "iterable",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": null
+                },
+                "requiredFor": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "resourceType",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\OwnershipNarrowingRefused": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/OwnershipNarrowingRefused.php",
+            "abstract": false,
+            "final": true,
+            "readonly": false,
+            "parent": "RuntimeException",
+            "interfaces": [
+                "Stringable",
+                "Throwable"
+            ],
+            "constants": {},
+            "properties": {
+                "referencingSites": {
+                    "type": "array",
+                    "static": false,
+                    "readonly": false
+                }
+            },
+            "methods": {
+                "__construct": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "resource",
+                            "type": "Kumwe\\Access\\AuthorizationResource",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "target",
+                            "type": "Kumwe\\Access\\OwnershipScope",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "referencingSites",
+                            "type": "array",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": null
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\OwnershipNarrowingUnbounded": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/OwnershipNarrowingUnbounded.php",
+            "abstract": false,
+            "final": true,
+            "readonly": false,
+            "parent": "RuntimeException",
+            "interfaces": [
+                "Stringable",
+                "Throwable"
+            ],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "__construct": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "resource",
+                            "type": "Kumwe\\Access\\AuthorizationResource",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "current",
+                            "type": "Kumwe\\Access\\OwnershipScope",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": null
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\OwnershipScope": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/OwnershipScope.php",
+            "abstract": false,
+            "final": true,
+            "readonly": true,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {
+                "identifier": {
+                    "type": "string",
+                    "static": false,
+                    "readonly": true
+                },
+                "level": {
+                    "type": "Kumwe\\Access\\OwnershipScopeLevel",
+                    "static": false,
+                    "readonly": true
+                },
+                "sites": {
+                    "type": "array",
+                    "static": false,
+                    "readonly": true
+                }
+            },
+            "methods": {
+                "contains": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "site",
+                            "type": "Kumwe\\Context\\Value\\SiteContext",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                },
+                "describe": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "string"
+                },
+                "equals": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "other",
+                            "type": "Kumwe\\Access\\OwnershipScope",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                },
+                "group": {
+                    "visibility": "public",
+                    "static": true,
+                    "parameters": [
+                        {
+                            "name": "group",
+                            "type": "Kumwe\\Access\\SiteGroup",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "Kumwe\\Access\\OwnershipScope"
+                },
+                "installation": {
+                    "visibility": "public",
+                    "static": true,
+                    "parameters": [],
+                    "return": "Kumwe\\Access\\OwnershipScope"
+                },
+                "isInstallation": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "bool"
+                },
+                "requireSite": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "Kumwe\\Context\\Value\\SiteContext"
+                },
+                "site": {
+                    "visibility": "public",
+                    "static": true,
+                    "parameters": [
+                        {
+                            "name": "site",
+                            "type": "Kumwe\\Context\\Value\\SiteContext",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "Kumwe\\Access\\OwnershipScope"
+                },
+                "siteOrNull": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "?Kumwe\\Context\\Value\\SiteContext"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\OwnershipScopeChangeRejected": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/OwnershipScopeChangeRejected.php",
+            "abstract": false,
+            "final": true,
+            "readonly": false,
+            "parent": "RuntimeException",
+            "interfaces": [
+                "Stringable",
+                "Throwable"
+            ],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "__construct": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "resource",
+                            "type": "Kumwe\\Access\\AuthorizationResource",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "current",
+                            "type": "Kumwe\\Access\\OwnershipScope",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "target",
+                            "type": "Kumwe\\Access\\OwnershipScope",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "direction",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": null
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\OwnershipScopeLevel": {
+            "kind": "enum",
+            "stability": "stable",
+            "file": "src/OwnershipScopeLevel.php",
+            "abstract": false,
+            "final": true,
+            "readonly": false,
+            "parent": null,
+            "interfaces": [],
+            "constants": {
+                "Group": {
+                    "type": "string"
+                },
+                "Installation": {
+                    "type": "string"
+                },
+                "Site": {
+                    "type": "string"
+                }
+            },
+            "properties": {},
+            "methods": {
+                "reach": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "int"
+                },
+                "widerThan": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "other",
+                            "type": "Kumwe\\Access\\OwnershipScopeLevel",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\OwnershipScopeNotPermitted": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/OwnershipScopeNotPermitted.php",
+            "abstract": false,
+            "final": true,
+            "readonly": false,
+            "parent": "RuntimeException",
+            "interfaces": [
+                "Stringable",
+                "Throwable"
+            ],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "__construct": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "resource",
+                            "type": "Kumwe\\Access\\AuthorizationResource",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "scope",
+                            "type": "Kumwe\\Access\\OwnershipScope",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "rule",
+                            "type": "Kumwe\\Access\\OwnershipScopeRule",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": null
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\OwnershipScopeNotSiteBound": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/OwnershipScopeNotSiteBound.php",
+            "abstract": false,
+            "final": true,
+            "readonly": false,
+            "parent": "RuntimeException",
+            "interfaces": [
+                "Stringable",
+                "Throwable"
+            ],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "__construct": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "scope",
+                            "type": "Kumwe\\Access\\OwnershipScope",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": null
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\OwnershipScopeRule": {
+            "kind": "enum",
+            "stability": "stable",
+            "file": "src/OwnershipScopeRule.php",
+            "abstract": false,
+            "final": true,
+            "readonly": false,
+            "parent": null,
+            "interfaces": [],
+            "constants": {
+                "SiteGroupOrInstallation": {
+                    "type": "string"
+                },
+                "SiteOnly": {
+                    "type": "string"
+                },
+                "SiteOrGroup": {
+                    "type": "string"
+                }
+            },
+            "properties": {},
+            "methods": {
+                "levels": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "array"
+                },
+                "permits": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "level",
+                            "type": "Kumwe\\Access\\OwnershipScopeLevel",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\ResourceOwnership": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/ResourceOwnership.php",
+            "abstract": false,
+            "final": true,
+            "readonly": true,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {
+                "resource": {
+                    "type": "Kumwe\\Access\\AuthorizationResource",
+                    "static": false,
+                    "readonly": true
+                },
+                "scope": {
+                    "type": "Kumwe\\Access\\OwnershipScope",
+                    "static": false,
+                    "readonly": true
+                }
+            },
+            "methods": {
+                "of": {
+                    "visibility": "public",
+                    "static": true,
+                    "parameters": [
+                        {
+                            "name": "resource",
+                            "type": "Kumwe\\Access\\AuthorizationResource",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "scope",
+                            "type": "Kumwe\\Access\\OwnershipScope",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "policy",
+                            "type": "Kumwe\\Access\\ResourceOwnershipScopePolicy",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "Kumwe\\Access\\ResourceOwnership"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\ResourceOwnershipReferences": {
+            "kind": "interface",
+            "stability": "stable",
+            "file": "src/ResourceOwnershipReferences.php",
+            "abstract": false,
+            "final": false,
+            "readonly": false,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "sitesReferencing": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "resource",
+                            "type": "Kumwe\\Access\\AuthorizationResource",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "sites",
+                            "type": "array",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "array"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\ResourceOwnershipScopePolicy": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/ResourceOwnershipScopePolicy.php",
+            "abstract": false,
+            "final": true,
+            "readonly": false,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "__construct": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "reserved",
+                            "type": "array",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": null
+                },
+                "permits": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "category",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "level",
+                            "type": "Kumwe\\Access\\OwnershipScopeLevel",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                },
+                "register": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "category",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "rule",
+                            "type": "Kumwe\\Access\\OwnershipScopeRule",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "void"
+                },
+                "rule": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "category",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "Kumwe\\Access\\OwnershipScopeRule"
+                },
+                "table": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "array"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\ResourcePolicyDefinition": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/ResourcePolicyDefinition.php",
+            "abstract": false,
+            "final": true,
+            "readonly": true,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {
+                "capability": {
+                    "type": "Kumwe\\Access\\Capability",
+                    "static": false,
+                    "readonly": true
+                },
+                "definitionVersion": {
+                    "type": "int",
+                    "static": false,
+                    "readonly": true
+                },
+                "id": {
+                    "type": "string",
+                    "static": false,
+                    "readonly": true
+                },
+                "installationGlobal": {
+                    "type": "bool",
+                    "static": false,
+                    "readonly": true
+                },
+                "lifecycle": {
+                    "type": "Kumwe\\Access\\AuthorizationDefinitionLifecycle",
+                    "static": false,
+                    "readonly": true
+                },
+                "owner": {
+                    "type": "string",
+                    "static": false,
+                    "readonly": true
+                },
+                "systemIdentities": {
+                    "type": "array",
+                    "static": false,
+                    "readonly": true
+                },
+                "targets": {
+                    "type": "array",
+                    "static": false,
+                    "readonly": true
+                }
+            },
+            "methods": {
+                "__construct": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "owner",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "capability",
+                            "type": "Kumwe\\Access\\Capability",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "targets",
+                            "type": "iterable",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "installationGlobal",
+                            "type": "bool",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "systemIdentities",
+                            "type": "iterable",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "lifecycle",
+                            "type": "Kumwe\\Access\\AuthorizationDefinitionLifecycle",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "definitionVersion",
+                            "type": "int",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": null
+                },
+                "allowsSystemIdentity": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "identity",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                },
+                "enforceable": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "bool"
+                },
+                "matches": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "resource",
+                            "type": "Kumwe\\Access\\AuthorizationResource",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                },
+                "overlaps": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "other",
+                            "type": "Kumwe\\Access\\ResourcePolicyDefinition",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                },
+                "toArray": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "array"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\ResourcePolicyRegistry": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/ResourcePolicyRegistry.php",
+            "abstract": false,
+            "final": true,
+            "readonly": false,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "__construct": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "capabilities",
+                            "type": "Kumwe\\Access\\CapabilityDefinitionRegistry",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": null
+                },
+                "definitionFor": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "capability",
+                            "type": "Kumwe\\Access\\Capability",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "resource",
+                            "type": "Kumwe\\Access\\AuthorizationResource",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "?Kumwe\\Access\\ResourcePolicyDefinition"
+                },
+                "definitionsFor": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "capability",
+                            "type": "Kumwe\\Access\\Capability",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "array"
+                },
+                "ownedBy": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "owner",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "array"
+                },
+                "register": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "definition",
+                            "type": "Kumwe\\Access\\ResourcePolicyDefinition",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "void"
+                },
+                "removeOwner": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "owner",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "void"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\ResourcePolicyTarget": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/ResourcePolicyTarget.php",
+            "abstract": false,
+            "final": true,
+            "readonly": true,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {
+                "identifiers": {
+                    "type": "array",
+                    "static": false,
+                    "readonly": true
+                },
+                "type": {
+                    "type": "string",
+                    "static": false,
+                    "readonly": true
+                }
+            },
+            "methods": {
+                "__construct": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "type",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "identifiers",
+                            "type": "iterable",
+                            "optional": true,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": null
+                },
+                "matches": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "resource",
+                            "type": "Kumwe\\Access\\AuthorizationResource",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                },
+                "overlaps": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "other",
+                            "type": "Kumwe\\Access\\ResourcePolicyTarget",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                },
+                "toArray": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "array"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\ResourceSiteOwnership": {
+            "kind": "interface",
+            "stability": "stable",
+            "file": "src/ResourceSiteOwnership.php",
+            "abstract": false,
+            "final": false,
+            "readonly": false,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "scopeFor": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "resource",
+                            "type": "Kumwe\\Access\\AuthorizationResource",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "Kumwe\\Access\\OwnershipScope"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\ResourceSiteOwnershipConflict": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/ResourceSiteOwnershipConflict.php",
+            "abstract": false,
+            "final": true,
+            "readonly": false,
+            "parent": "RuntimeException",
+            "interfaces": [
+                "Stringable",
+                "Throwable"
+            ],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "__construct": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "resource",
+                            "type": "Kumwe\\Access\\AuthorizationResource",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "expected",
+                            "type": "Kumwe\\Access\\OwnershipScope",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "actual",
+                            "type": "Kumwe\\Access\\OwnershipScope",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": null
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\ResourceSiteOwnershipWriter": {
+            "kind": "interface",
+            "stability": "stable",
+            "file": "src/ResourceSiteOwnershipWriter.php",
+            "abstract": false,
+            "final": false,
+            "readonly": false,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "reassign": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "owner",
+                            "type": "Kumwe\\Access\\ResourceOwnership",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "expected",
+                            "type": "Kumwe\\Access\\OwnershipScope",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "void"
+                },
+                "record": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "resource",
+                            "type": "Kumwe\\Access\\AuthorizationResource",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "site",
+                            "type": "Kumwe\\Context\\Value\\SiteContext",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "void"
+                },
+                "remove": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "resource",
+                            "type": "Kumwe\\Access\\AuthorizationResource",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "expectedSite",
+                            "type": "Kumwe\\Context\\Value\\SiteContext",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "void"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\SiteGroup": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/SiteGroup.php",
+            "abstract": false,
+            "final": true,
+            "readonly": true,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {
+                "identifier": {
+                    "type": "string",
+                    "static": false,
+                    "readonly": true
+                },
+                "members": {
+                    "type": "array",
+                    "static": false,
+                    "readonly": true
+                },
+                "name": {
+                    "type": "string",
+                    "static": false,
+                    "readonly": true
+                }
+            },
+            "methods": {
+                "__construct": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "identifier",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "members",
+                            "type": "iterable",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": null
+                },
+                "contains": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "site",
+                            "type": "Kumwe\\Context\\Value\\SiteContext",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "bool"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\SiteGroupRegistry": {
+            "kind": "interface",
+            "stability": "stable",
+            "file": "src/SiteGroupRegistry.php",
+            "abstract": false,
+            "final": false,
+            "readonly": false,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "all": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [],
+                    "return": "array"
+                },
+                "group": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "identifier",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "Kumwe\\Access\\SiteGroup"
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\SiteGroupUnknown": {
+            "kind": "class",
+            "stability": "stable",
+            "file": "src/SiteGroupUnknown.php",
+            "abstract": false,
+            "final": true,
+            "readonly": false,
+            "parent": "RuntimeException",
+            "interfaces": [
+                "Stringable",
+                "Throwable"
+            ],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "__construct": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "identifier",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": null
+                }
+            },
+            "deprecated": null
+        },
+        "Kumwe\\Access\\SiteGroupWriter": {
+            "kind": "interface",
+            "stability": "stable",
+            "file": "src/SiteGroupWriter.php",
+            "abstract": false,
+            "final": false,
+            "readonly": false,
+            "parent": null,
+            "interfaces": [],
+            "constants": {},
+            "properties": {},
+            "methods": {
+                "addSite": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "group",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "site",
+                            "type": "Kumwe\\Context\\Value\\SiteContext",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "void"
+                },
+                "removeSite": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "group",
+                            "type": "string",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        },
+                        {
+                            "name": "site",
+                            "type": "Kumwe\\Context\\Value\\SiteContext",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "void"
+                },
+                "save": {
+                    "visibility": "public",
+                    "static": false,
+                    "parameters": [
+                        {
+                            "name": "group",
+                            "type": "Kumwe\\Access\\SiteGroup",
+                            "optional": false,
+                            "variadic": false,
+                            "by_reference": false
+                        }
+                    ],
+                    "return": "void"
+                }
+            },
+            "deprecated": null
+        }
+    },
+    "extension_points": [
+        "Kumwe\\Access\\AuthorizationDecisionRecorder",
+        "Kumwe\\Access\\AuthorizationGateway",
+        "Kumwe\\Access\\MembershipContextValidator",
+        "Kumwe\\Access\\ResourceOwnershipReferences",
+        "Kumwe\\Access\\ResourceSiteOwnership",
+        "Kumwe\\Access\\ResourceSiteOwnershipWriter",
+        "Kumwe\\Access\\SiteGroupRegistry",
+        "Kumwe\\Access\\SiteGroupWriter"
+    ],
+    "digest_of": "src"
+}

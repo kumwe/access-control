@@ -52,7 +52,7 @@ abstract class TestCase
      *
      * @since   0.1.0
      */
-    final protected function assertTrue(bool $condition, string $message): void
+    final protected function assertTrue(bool $condition, string $message = ''): void
     {
         $this->assertions++;
         if (!$condition) {
@@ -72,7 +72,7 @@ abstract class TestCase
      *
      * @since   0.1.0
      */
-    final protected function assertFalse(bool $condition, string $message): void
+    final protected function assertFalse(bool $condition, string $message = ''): void
     {
         $this->assertTrue(!$condition, $message);
     }
@@ -90,7 +90,7 @@ abstract class TestCase
      *
      * @since   0.1.0
      */
-    final protected function assertSame(mixed $expected, mixed $actual, string $message): void
+    final protected function assertSame(mixed $expected, mixed $actual, string $message = ''): void
     {
         $this->assertions++;
         if ($expected !== $actual) {
@@ -113,7 +113,7 @@ abstract class TestCase
      *
      * @since   0.1.0
      */
-    final protected function assertNotSame(mixed $unexpected, mixed $actual, string $message): void
+    final protected function assertNotSame(mixed $unexpected, mixed $actual, string $message = ''): void
     {
         $this->assertions++;
         if ($unexpected === $actual) {
@@ -133,7 +133,7 @@ abstract class TestCase
      *
      * @since   0.1.0
      */
-    final protected function assertNull(mixed $actual, string $message): void
+    final protected function assertNull(mixed $actual, string $message = ''): void
     {
         $this->assertSame(null, $actual, $message);
     }
@@ -151,7 +151,7 @@ abstract class TestCase
      *
      * @since   0.1.0
      */
-    final protected function assertStringContains(string $needle, string $haystack, string $message): void
+    final protected function assertStringContains(string $needle, string $haystack, string $message = ''): void
     {
         $this->assertions++;
         if (!str_contains($haystack, $needle)) {
@@ -172,7 +172,7 @@ abstract class TestCase
      *
      * @since   0.1.0
      */
-    final protected function assertStringExcludes(string $needle, string $haystack, string $message): void
+    final protected function assertStringExcludes(string $needle, string $haystack, string $message = ''): void
     {
         $this->assertions++;
         if (str_contains($haystack, $needle)) {
@@ -193,7 +193,7 @@ abstract class TestCase
      *
      * @since   0.1.0
      */
-    final protected function assertThrows(callable $operation, string $exceptionClass, string $message): Throwable
+    final protected function assertThrows(callable $operation, string $exceptionClass, string $message = ''): Throwable
     {
         $this->assertions++;
         try {
@@ -225,9 +225,9 @@ abstract class TestCase
      *
      * @since   0.1.0
      */
-    final protected function assertRefused(callable $operation, string $expected, string $message): void
+    final protected function assertRefused(callable $operation, string $expected, string $message = ''): void
     {
-        $error = $this->assertThrows($operation, \Kumwe\Access\Exception\InvalidContext::class, $message);
+        $error = $this->assertThrows($operation, \InvalidArgumentException::class, $message);
         $this->assertSame($expected, $error->getMessage(), $message . ' The refusal must name the rule.');
     }
 }

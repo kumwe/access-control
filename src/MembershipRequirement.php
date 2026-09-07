@@ -13,7 +13,11 @@ use InvalidArgumentException;
  */
 final readonly class MembershipRequirement
 {
-    /** Sorted normalized resource types. @var list<string> @since 0.1.0 */
+    /**
+ * Sorted normalized resource types.
+ * @var list<string>
+ * @since 0.1.0
+ */
     public array $resourceTypes;
 
     /**

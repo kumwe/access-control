@@ -13,6 +13,8 @@
 
 declare(strict_types=1);
 
+require dirname(__DIR__) . '/vendor/autoload.php';
+
 spl_autoload_register(static function (string $class): void {
     $prefixes = [
         'Kumwe\\Access\\Tests\\' => __DIR__ . '/',
@@ -96,6 +98,12 @@ if ($totalTests === 0) {
 if ($failures !== []) {
     fwrite(STDERR, "\nFailures:\n - " . implode("\n - ", $failures) . "\n");
     exit(1);
+}
+
+if ($listOnly) {
+    ksort($inventory, SORT_STRING);
+    echo json_encode($inventory, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . "\n";
+    exit(0);
 }
 
 echo "\nAccess Control suite passed: {$totalTests} tests, {$totalAssertions} assertions.\n";

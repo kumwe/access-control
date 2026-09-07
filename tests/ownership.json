@@ -1,0 +1,430 @@
+{
+  "schema": "kumwe-test-ownership/v1",
+  "package": "kumwe/access-control",
+  "api_manifest": "resources/public-api/v1.json",
+  "suite": {
+    "inventory_command": [
+      "php",
+      "tests/run.php",
+      "--list-json"
+    ]
+  },
+  "exports": {
+    "Kumwe\\Access\\AuthorizationDecision": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\DecisionTest::testEveryDecisionPairAndOrder"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\DecisionTest::testMachineCodeBoundary"
+      ]
+    },
+    "Kumwe\\Access\\AuthorizationDecisionRecorder": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\PortTest::testGatewayAndRecorderSignatureConformance"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\PortTest::testGatewayAndRecorderSignatureConformance"
+      ]
+    },
+    "Kumwe\\Access\\AuthorizationDefinitionLifecycle": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\RegistryTest::testCapabilityDefinitions"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\RegistryTest::testCapabilityDefinitionBoundaries"
+      ]
+    },
+    "Kumwe\\Access\\AuthorizationDenied": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testRefusalDataContracts"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testRefusalDataContracts"
+      ]
+    },
+    "Kumwe\\Access\\AuthorizationGateway": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\PortTest::testGatewayAndRecorderSignatureConformance"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\PortTest::testGatewayAndRecorderSignatureConformance"
+      ]
+    },
+    "Kumwe\\Access\\AuthorizationPolicyRegistry": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\RegistryTest::testComposedRegistryAndDelegation"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\RegistryTest::testDisabledAndExplicitMembershipPolicy"
+      ]
+    },
+    "Kumwe\\Access\\AuthorizationResource": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\IdentityTest::testTargetIdentityAndOverlap"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\IdentityTest::testTargetBoundaries"
+      ]
+    },
+    "Kumwe\\Access\\AuthorizationResourceOwnershipUnknown": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testRefusalDataContracts"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testRefusalDataContracts"
+      ]
+    },
+    "Kumwe\\Access\\Capability": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\IdentityTest::testCapabilityIdentity"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\IdentityTest::testRawControlRefusal"
+      ]
+    },
+    "Kumwe\\Access\\CapabilityDefinition": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\RegistryTest::testCapabilityDefinitions"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\RegistryTest::testCapabilityDefinitionBoundaries"
+      ]
+    },
+    "Kumwe\\Access\\CapabilityDefinitionRegistry": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\RegistryTest::testRegistryCollisionAndOrdering"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\RegistryTest::testCapabilityDefinitionBoundaries"
+      ]
+    },
+    "Kumwe\\Access\\CompositeResourceOwnershipReferences": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testReferenceUnionAndBounds"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testReferenceUnionAndBounds",
+        "Kumwe\\Access\\Tests\\Case\\HostileDefinitionTest::testRejectsUntypedReferenceIdentifiers"
+      ]
+    },
+    "Kumwe\\Access\\ConfigProvider": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\FactoryTest::testProviderAndFactories"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\FactoryTest::testMissingAndMalformedPolicyConfiguration"
+      ]
+    },
+    "Kumwe\\Access\\Container\\AuthorizationPolicyRegistryFactory": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\FactoryTest::testProviderAndFactories"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\FactoryTest::testMissingAndMalformedPolicyConfiguration"
+      ]
+    },
+    "Kumwe\\Access\\Container\\CompositeResourceOwnershipReferencesFactory": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\FactoryTest::testProviderAndFactories"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\FactoryTest::testReferenceFactoryTypeAndRecursionBoundaries"
+      ]
+    },
+    "Kumwe\\Access\\Container\\ResourceOwnershipScopePolicyFactory": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\FactoryTest::testProviderAndFactories"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\FactoryTest::testMissingAndMalformedPolicyConfiguration"
+      ]
+    },
+    "Kumwe\\Access\\DecisionCombiner": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\DecisionTest::testEveryDecisionPairAndOrder"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\DecisionTest::testBoundedDecisionConsumption",
+        "Kumwe\\Access\\Tests\\Case\\HostileDefinitionTest::testRejectsWrongDecisionAndInspectorTypes"
+      ]
+    },
+    "Kumwe\\Access\\DecisionState": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\DecisionTest::testEveryDecisionPairAndOrder"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\DecisionTest::testMachineCodeBoundary"
+      ]
+    },
+    "Kumwe\\Access\\GrantScope": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\IdentityTest::testGrantScopeCoverage"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\IdentityTest::testRawControlRefusal"
+      ]
+    },
+    "Kumwe\\Access\\MembershipContextValidator": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\PortTest::testMembershipFreshnessPortConformance"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\PortTest::testMembershipFreshnessPortConformance"
+      ]
+    },
+    "Kumwe\\Access\\MembershipRequirement": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\RegistryTest::testDisabledAndExplicitMembershipPolicy"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\RegistryTest::testDisabledAndExplicitMembershipPolicy"
+      ]
+    },
+    "Kumwe\\Access\\OwnershipNarrowingRefused": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testRefusalDataContracts"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testRefusalDataContracts"
+      ]
+    },
+    "Kumwe\\Access\\OwnershipNarrowingUnbounded": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testRefusalDataContracts"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testRefusalDataContracts"
+      ]
+    },
+    "Kumwe\\Access\\OwnershipScope": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testScopeIdentityAndReach"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testGroupSnapshotAndContainment"
+      ]
+    },
+    "Kumwe\\Access\\OwnershipScopeChangeRejected": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testRefusalDataContracts"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testRefusalDataContracts"
+      ]
+    },
+    "Kumwe\\Access\\OwnershipScopeLevel": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testRuleMatrixAndExplicitHostPolicy"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testResourceOwnershipBoundaries"
+      ]
+    },
+    "Kumwe\\Access\\OwnershipScopeNotPermitted": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testRefusalDataContracts"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testRefusalDataContracts"
+      ]
+    },
+    "Kumwe\\Access\\OwnershipScopeNotSiteBound": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testRefusalDataContracts"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testRefusalDataContracts"
+      ]
+    },
+    "Kumwe\\Access\\OwnershipScopeRule": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testRuleMatrixAndExplicitHostPolicy"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testResourceOwnershipBoundaries"
+      ]
+    },
+    "Kumwe\\Access\\ResourceOwnership": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testResourceOwnershipBoundaries"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testResourceOwnershipBoundaries"
+      ]
+    },
+    "Kumwe\\Access\\ResourceOwnershipReferences": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testReferenceUnionAndBounds"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testReferenceUnionAndBounds"
+      ]
+    },
+    "Kumwe\\Access\\ResourceOwnershipScopePolicy": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testRuleMatrixAndExplicitHostPolicy"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testResourceOwnershipBoundaries",
+        "Kumwe\\Access\\Tests\\Case\\HostileDefinitionTest::testRejectsUntypedReservedRules"
+      ]
+    },
+    "Kumwe\\Access\\ResourcePolicyDefinition": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\RegistryTest::testPolicyDefinitionAuthority"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\RegistryTest::testPolicyDefinitionBoundaries",
+        "Kumwe\\Access\\Tests\\Case\\HostileDefinitionTest::testRejectsExecutableDuckTypedTargets"
+      ]
+    },
+    "Kumwe\\Access\\ResourcePolicyRegistry": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\RegistryTest::testRegistryCollisionAndOrdering"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\RegistryTest::testCapabilityWithdrawalFailsClosed"
+      ]
+    },
+    "Kumwe\\Access\\ResourcePolicyTarget": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\IdentityTest::testTargetIdentityAndOverlap"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\IdentityTest::testTargetBoundaries"
+      ]
+    },
+    "Kumwe\\Access\\ResourceSiteOwnership": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\PortTest::testOwnershipPortConformance"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\PortTest::testPortReturnTypeBoundary"
+      ]
+    },
+    "Kumwe\\Access\\ResourceSiteOwnershipConflict": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testRefusalDataContracts"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testRefusalDataContracts"
+      ]
+    },
+    "Kumwe\\Access\\ResourceSiteOwnershipWriter": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\PortTest::testOwnershipPortConformance"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\PortTest::testPortReturnTypeBoundary"
+      ]
+    },
+    "Kumwe\\Access\\SiteGroup": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testGroupSnapshotAndContainment"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testGroupBoundaries"
+      ]
+    },
+    "Kumwe\\Access\\SiteGroupRegistry": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\PortTest::testSiteGroupPortConformance"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\PortTest::testSiteGroupPortConformance"
+      ]
+    },
+    "Kumwe\\Access\\SiteGroupUnknown": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testRefusalDataContracts"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testRefusalDataContracts"
+      ]
+    },
+    "Kumwe\\Access\\SiteGroupWriter": {
+      "behavior": [
+        "Kumwe\\Access\\Tests\\Case\\PortTest::testSiteGroupPortConformance"
+      ],
+      "boundary": [
+        "Kumwe\\Access\\Tests\\Case\\PortTest::testSiteGroupPortConformance"
+      ]
+    }
+  },
+  "conformance": {
+    "status": "owned",
+    "rationale": "Canonical four-state algebra corpus and explicit package port protocols are owned here; host adapter security and persistence remain in App.",
+    "tests": [
+      "Kumwe\\Access\\Tests\\Case\\DecisionTest::testEveryDecisionPairAndOrder",
+      "Kumwe\\Access\\Tests\\Case\\PortTest::testOwnershipPortConformance",
+      "Kumwe\\Access\\Tests\\Case\\PortTest::testMembershipFreshnessPortConformance"
+    ],
+    "corpora": [
+      "resources/conformance/decisions-v1.json"
+    ]
+  },
+  "architecture": [
+    "tools/verify-architecture.php"
+  ],
+  "host": {
+    "repository": "kumwe/app",
+    "baseline": "960ce8ec00cf724a7cae03e5ba09c4852c9ab54e",
+    "transfers": [
+      {
+        "source_test": "tests/Unit/Identity/Domain/GrantScopeTest.php",
+        "action": "remove-on-adoption",
+        "package_tests": [
+          "Kumwe\\Access\\Tests\\Case\\IdentityTest::testGrantScopeCoverage"
+        ],
+        "retained": "Host role/user/delegation authority remains."
+      },
+      {
+        "source_test": "tests/Unit/Identity/Domain/AuthorizationDecisionTest.php",
+        "action": "remove-on-adoption",
+        "package_tests": [
+          "Kumwe\\Access\\Tests\\Case\\DecisionTest::testEveryDecisionPairAndOrder"
+        ],
+        "retained": "Inactive-user and concrete policy evaluation remain."
+      },
+      {
+        "source_test": "tests/Unit/Application/Authorization/ResourcePolicyDefinitionTest.php",
+        "action": "remove-on-adoption",
+        "package_tests": [
+          "Kumwe\\Access\\Tests\\Case\\RegistryTest::testPolicyDefinitionAuthority"
+        ],
+        "retained": "Host system identity issuance remains."
+      },
+      {
+        "source_test": "tests/Unit/Application/Authorization/ResourcePolicyRegistryTest.php",
+        "action": "remove-on-adoption",
+        "package_tests": [
+          "Kumwe\\Access\\Tests\\Case\\RegistryTest::testRegistryCollisionAndOrdering"
+        ],
+        "retained": "Host trust/lifecycle admission remains."
+      },
+      {
+        "source_test": "tests/Unit/Application/Authorization/OwnershipScopeModelTest.php",
+        "action": "split-on-adoption",
+        "package_tests": [
+          "Kumwe\\Access\\Tests\\Case\\OwnershipTest::testRuleMatrixAndExplicitHostPolicy"
+        ],
+        "retained": "Exact44reserved App categories and trusted registration remain."
+      },
+      {
+        "source_test": "tests/Unit/Application/Authorization/AuthorizationPolicyRegistryTest.php",
+        "action": "split-on-adoption",
+        "package_tests": [
+          "Kumwe\\Access\\Tests\\Case\\RegistryTest::testComposedRegistryAndDelegation"
+        ],
+        "retained": "Exact7membership-sensitive App targets and wiring remain."
+      }
+    ],
+    "retained_responsibilities": [
+      "Final authorization, principal provenance and issue authority.",
+      "Database/CAS/transaction/audit coupling and live membership freshness.",
+      "Vertical/horizontal escalation and query/count/relation/report leakage.",
+      "Token audience, extension trust revocation, direct invocation and delivery parity.",
+      "Lifecycle, deployment, recovery and generated manifest/SDK integration."
+    ]
+  }
+}

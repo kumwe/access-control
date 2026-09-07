@@ -27,7 +27,9 @@ final class AuthorizationPolicyRegistryFactory
     public function __invoke(ContainerInterface $container): AuthorizationPolicyRegistry
     {
         $configuration = $container->get('config');
-        $types = is_array($configuration) ? ($configuration['kumwe']['access']['membership_resource_types'] ?? null) : null;
+        $kumwe = is_array($configuration) ? ($configuration['kumwe'] ?? null) : null;
+        $access = is_array($kumwe) ? ($kumwe['access'] ?? null) : null;
+        $types = is_array($access) ? ($access['membership_resource_types'] ?? null) : null;
         if (!is_array($types) || !array_is_list($types)) {
             throw new InvalidArgumentException('Explicit membership_resource_types list configuration is required.');
         }

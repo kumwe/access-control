@@ -13,7 +13,11 @@ use InvalidArgumentException;
  */
 final readonly class AuthorizationDecision
 {
-    /** True exclusively for Allow; abstention and step-up confer no authority. @var bool @since 0.1.0 */
+    /**
+ * True exclusively for Allow; abstention and step-up confer no authority.
+ * @var bool
+ * @since 0.1.0
+ */
     public bool $allowed;
 
     /**

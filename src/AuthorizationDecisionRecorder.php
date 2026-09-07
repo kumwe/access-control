@@ -6,7 +6,6 @@ namespace Kumwe\Access;
 
 use Kumwe\Context\Value\ExecutionContext;
 
-
 /**
  * Port that receives every authorization decision the gateway reaches, allow or deny alike.
  *

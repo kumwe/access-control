@@ -7,23 +7,21 @@ namespace Kumwe\Access;
 use InvalidArgumentException;
 
 /**
- * The frozen table of which ownership levels each resource category may be held at.
+ * Neutral ownership-rule registry with an explicit host-owned reserved category table.
  *
- * This is what makes "accounting is isolated by design" a property of the build rather than of an
- * operator's discipline. The core table below is PHP source, not configuration: there is no environment
- * variable, settings row or manifest key that turns a ledger into shared property, and an extension that
- * contributes an accounting category inherits the rule rather than choosing one. Categories core has not
- * reserved may be declared once by whoever contributes them, and a category nobody declares falls back to
- * `SiteOnly`, so a new resource family is isolated until someone deliberately opts it into sharing.
+ * No accounting, content, extension or other host category is embedded here. Unknown categories
+ * remain site-only; reserved categories cannot be redeclared; declarations are idempotent only
+ * for the same rule. The host decides which trusted definitions it registers.
  *
- * The catalogue only answers questions; enforcement happens where an owner is constructed, in
- * `ResourceOwnership::of()`, so an impermissible pairing never reaches the registry to be refused there.
- *
- * @since  0.1.0
+ * @since 0.1.0
  */
 final class ResourceOwnershipScopePolicy
 {
-    /** Host-owned frozen category rules. @var array<string, OwnershipScopeRule> @since 0.1.0 */
+    /**
+ * Host-owned frozen category rules.
+ * @var array<string, OwnershipScopeRule>
+ * @since 0.1.0
+ */
     private readonly array $reserved;
 
     /**
@@ -40,6 +38,9 @@ final class ResourceOwnershipScopePolicy
         }
         $snapshot = [];
         foreach ($reserved as $category => $rule) {
+            if (!is_string($category) || !$rule instanceof OwnershipScopeRule) {
+                throw new InvalidArgumentException('Reserved categories require typed ownership scope rules.');
+            }
             AuthorizationResource::collection($category);
             $snapshot[$category] = $rule;
         }

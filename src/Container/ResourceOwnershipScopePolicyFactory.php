@@ -27,14 +27,16 @@ final class ResourceOwnershipScopePolicyFactory
     public function __invoke(ContainerInterface $container): ResourceOwnershipScopePolicy
     {
         $configuration = $container->get('config');
-        $rules = is_array($configuration) ? ($configuration['kumwe']['access']['reserved_ownership_rules'] ?? null) : null;
+        $kumwe = is_array($configuration) ? ($configuration['kumwe'] ?? null) : null;
+        $access = is_array($kumwe) ? ($kumwe['access'] ?? null) : null;
+        $rules = is_array($access) ? ($access['reserved_ownership_rules'] ?? null) : null;
         if (!is_array($rules)) {
             throw new InvalidArgumentException('Explicit reserved_ownership_rules configuration is required.');
         }
         $typed = [];
         foreach ($rules as $category => $rule) {
             if (!is_string($category) || !is_string($rule) || OwnershipScopeRule::tryFrom($rule) === null) {
-                throw new InvalidArgumentException('Reserved ownership rules require named categories and valid rules.');
+                throw new InvalidArgumentException('Reserved rules require named categories and valid rules.');
             }
             $typed[$category] = OwnershipScopeRule::from($rule);
         }
