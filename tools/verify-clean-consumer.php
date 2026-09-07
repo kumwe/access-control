@@ -165,7 +165,7 @@ $consumerMetadata = [
     'name' => 'kumwe/clean-consumer',
     'description' => 'Isolated verification of the built package archive.',
     'license' => 'proprietary',
-    'require' => ['kumwe/access-control' => $release],
+    'require' => ['kumwe/access-control' => $release, 'laminas/laminas-servicemanager' => '^4.0'],
     'repositories' => [
         ['type' => 'package', 'package' => $metadata],
     ],
@@ -207,6 +207,7 @@ if (is_dir($installed . '/vendor')) {
 }
 $autoload = $consumer . '/vendor/autoload.php';
 consumerRun([PHP_BINARY, $installed . '/resources/toolchain/autoload-smoke.php', $autoload], $workspace);
+consumerRun([PHP_BINARY, $installed . '/resources/toolchain/service-manager-smoke.php', $autoload], $workspace);
 
 $classmap = require $consumer . '/vendor/composer/autoload_classmap.php';
 $symbols = is_array($manifest['symbols'] ?? null) ? $manifest['symbols'] : [];

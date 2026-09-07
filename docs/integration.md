@@ -30,3 +30,15 @@ ResourceOwnershipScopeService, SiteGroupAdministration and Doctrine adapters. Ke
 registries/trust/lifecycle wiring; compose portable definitions instead of duplicating their invariants. Source
 changes since App960ce8ec00cf724a7cae03e5ba09c4852c9ab54e or SDKd0484b8733eaa57d076f567ffa5e997b9564b5fa need semantic
 reconciliation and a new package release before adoption. No App edits are part of this draft.
+
+## Verified Laminas service resolution
+
+The consuming host installs `laminas/laminas-servicemanager:^4.0` and registers
+`(new Kumwe\Access\ConfigProvider())()['dependencies']` in its ServiceManager,
+with its explicit policy array registered as the `config` service. ServiceManager
+is a host integration choice and a development dependency of this package; portable
+runtime code only requires PSR-11. The archive consumer declares the host dependency
+itself and invokes `resources/toolchain/service-manager-smoke.php` through its own
+no-dev authoritative Composer autoloader. This gate resolves all three advertised
+services, verifies shared lifetimes and empty capability registries, proves missing
+configuration fails, and ensures no host authorization gateway is registered.
