@@ -57,6 +57,8 @@ final readonly class CompositeResourceOwnershipReferences implements ResourceOwn
      *
      * @return  list<string>  De-duplicated union in site-identifier order.
      *
+     * @throws InvalidArgumentException On invalid canonical string lists or bounded-entry overflow.
+     *
      * @since  0.1.0
      */
     public function sitesReferencing(AuthorizationResource $resource, array $sites): array

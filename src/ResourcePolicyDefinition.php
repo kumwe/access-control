@@ -49,7 +49,7 @@ final readonly class ResourcePolicyDefinition
      * @param   string                            $owner               `core` or the owning extension's
      *          `vendor/name` identifier.
      * @param   Capability                        $capability          Action whose reach this policy defines.
-     * @param   iterable<ResourcePolicyTarget>    $targets             Non-empty bounded resource selectors.
+     * @param   iterable<ResourcePolicyTarget>     $targets             Non-empty bounded resource selectors.
      * @param   bool                              $installationGlobal  Whether matching resources require a
      *          global human grant rather than site ownership.
      * @param   iterable<string>          $systemIdentities    Core system identities permitted to use it.

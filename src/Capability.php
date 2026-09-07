@@ -43,8 +43,8 @@ final readonly class Capability implements Stringable
     /**
      * Normalise and validate a capability code from an operator, a manifest, or a stored row.
      *
-     * Trimming and lowercasing happen before the value is judged, so surrounding whitespace and casing
-     * are corrected rather than refused. The grammar itself is strict: a leading letter, then
+     * Raw ASCII control bytes are refused first. Trimming spaces and lowercasing then normalize casing
+     * and ordinary surrounding spaces. The grammar itself is strict: a leading letter, then
      * alphanumeric groups joined by single `.`, `_`, `:` or `-` separators, with no trailing separator.
      *
      * @param   string  $value  Capability code as written, in any casing and with any surrounding space.

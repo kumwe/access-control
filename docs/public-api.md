@@ -8,7 +8,7 @@ Values are final/readonly unless explicitly mutable; no value performs I/O or st
 per-container bootstrap state and have no process synchronization. Host ports specify responsibilities but ship no
 authority/persistence adapter. PHP exceptions inherit their standard Throwable API and do not confer authority. Enum
 cases use stable strings. Factory failures never synthesize defaults. Bounds and initial clean-break decisions AC-001
-through AC-007 in architecture.md apply to every relevant constructor even when historical source comments describe
+throughAC-007 in architecture.md apply to every relevant constructor even when historical source comments describe
 normalized logical counts.
 
 ## `Kumwe\Access\AuthorizationDecision`
@@ -18,7 +18,7 @@ Immutable four-state authorization result with stable machine-readable provenanc
 @since 0.1.0
 
 Public properties: `allowed` (bool, readonly); `policy` (string, readonly); `reason` (string, readonly); `state`
-(Kumwe\Access\DecisionState, readonly);
+(Kumwe\Access\DecisionState, readonly); 
 
 ### `__construct(Kumwe\Access\DecisionState $state, string $policy, string $reason)`
 
@@ -100,7 +100,7 @@ the `AuthorizationDecision` the gateway already recorded.
 
 Public properties: `action` (string, readonly); `policy` (string, readonly); `reason` (string, readonly);
 `resourceIdentifier` (string, readonly); `resourceType` (string, readonly); `siteIdentifier` (string, readonly);
-`subject` (string, readonly);
+`subject` (string, readonly); 
 
 ### `__construct(string $subject, string $action, string $resourceType, string $resourceIdentifier, string $siteIdentifier, string $policy, string $reason)`
 
@@ -383,8 +383,8 @@ Report which resource within the family is being acted on.
 
 Name one addressable resource within a family.
 
-Surrounding whitespace is stripped before validation, so a raw route segment or request field can be
-handed over as it arrived.
+Raw ASCII controls are refused before trimming ordinary surrounding spaces. A raw request field can be
+handed over explicitly; malformed input fails rather than losing forbidden bytes.
 
 @param   string  $type        Resource family the identifier belongs to.
 @param   string  $identifier  Identity of the resource, usually its primary key or slug.
@@ -462,8 +462,8 @@ lenient comparison; nothing further is folded here.
 
 Normalise and validate a capability code from an operator, a manifest, or a stored row.
 
-Trimming and lowercasing happen before the value is judged, so surrounding whitespace and casing
-are corrected rather than refused. The grammar itself is strict: a leading letter, then
+Raw ASCII control bytes are refused first. Trimming spaces and lowercasing then normalize casing
+and ordinary surrounding spaces. The grammar itself is strict: a leading letter, then
 alphanumeric groups joined by single `.`, `_`, `:` or `-` separators, with no trailing separator.
 
 @param   string  $value  Capability code as written, in any casing and with any surrounding space.
@@ -497,7 +497,7 @@ when their owner disables or retires the capability.
 
 Public properties: `allowedScopes` (array, readonly); `capability` (Kumwe\Access\Capability, readonly);
 `definitionVersion` (int, readonly); `delegatable` (bool, readonly); `highImpact` (bool, readonly); `lifecycle`
-(Kumwe\Access\AuthorizationDefinitionLifecycle, readonly); `owner` (string, readonly);
+(Kumwe\Access\AuthorizationDefinitionLifecycle, readonly); `owner` (string, readonly); 
 
 ### `__construct(Kumwe\Access\Capability $capability, string $owner, iterable $allowedScopes, bool $delegatable, bool $highImpact, Kumwe\Access\AuthorizationDefinitionLifecycle $lifecycle, int $definitionVersion)`
 
@@ -685,6 +685,8 @@ Name every site any inspector reports as still referring to the resource.
 
 @return  list<string>  De-duplicated union in site-identifier order.
 
+@throws InvalidArgumentException On invalid canonical string lists or bounded-entry overflow.
+
 @since  0.1.0
 
 ## `Kumwe\Access\ConfigProvider`
@@ -842,8 +844,8 @@ Whether this scope reaches the whole installation rather than a single resource.
 
 Build a scope restricted to one identified resource.
 
-The type is trimmed and lowercased and the identifier trimmed before either is judged, so values
-read back from configuration or a stored row need no cleaning first. `global` is refused as a
+Raw ASCII controls in either input are refused before normalization. The type is then trimmed and
+lowercased and the identifier trimmed. `global` is refused as a
 type here because the unrestricted scope carries no identifier and must come from `global()`.
 
 @param   string  $type        Kind of resource the grant is limited to, such as `site`.
@@ -975,7 +977,7 @@ replaced, which is the property that makes the widening safe for every resource 
 @since  0.1.0
 
 Public properties: `identifier` (string, readonly); `level` (Kumwe\Access\OwnershipScopeLevel, readonly); `sites`
-(array, readonly);
+(array, readonly); 
 
 ### `contains(Kumwe\Context\Value\SiteContext $site): bool`
 
@@ -1220,7 +1222,7 @@ registry remembers to apply into a shape the type system will not let a caller s
 @since  0.1.0
 
 Public properties: `resource` (Kumwe\Access\AuthorizationResource, readonly); `scope` (Kumwe\Access\OwnershipScope,
-readonly);
+readonly); 
 
 ### `of(Kumwe\Access\AuthorizationResource $resource, Kumwe\Access\OwnershipScope $scope, Kumwe\Access\ResourceOwnershipScopePolicy $policy): Kumwe\Access\ResourceOwnership`
 
@@ -1346,7 +1348,7 @@ attribute policies can layer on this base binding without turning registry loadi
 
 Public properties: `capability` (Kumwe\Access\Capability, readonly); `definitionVersion` (int, readonly); `id`
 (string, readonly); `installationGlobal` (bool, readonly); `lifecycle` (Kumwe\Access\AuthorizationDefinitionLifecycle,
-readonly); `owner` (string, readonly); `systemIdentities` (array, readonly); `targets` (array, readonly);
+readonly); `owner` (string, readonly); `systemIdentities` (array, readonly); `targets` (array, readonly); 
 
 ### `__construct(string $id, string $owner, Kumwe\Access\Capability $capability, iterable $targets, bool $installationGlobal, iterable $systemIdentities, Kumwe\Access\AuthorizationDefinitionLifecycle $lifecycle, int $definitionVersion)`
 
@@ -1356,7 +1358,7 @@ Validate and hold one resource-policy definition.
 @param   string                            $owner               `core` or the owning extension's
          `vendor/name` identifier.
 @param   Capability                        $capability          Action whose reach this policy defines.
-@param   iterable<ResourcePolicyTarget>    $targets             Non-empty bounded resource selectors.
+@param   iterable<ResourcePolicyTarget>     $targets             Non-empty bounded resource selectors.
 @param   bool                              $installationGlobal  Whether matching resources require a
          global human grant rather than site ownership.
 @param   iterable<string>          $systemIdentities    Core system identities permitted to use it.
