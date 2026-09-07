@@ -32,12 +32,14 @@ cat > "$work/baseline/composer.json" <<'JSON'
 JSON
 jq -n --arg sha "$commit" '{packages:[{name:"kumwe/fixture-dependency",version:"v1.2.3",
   source:{type:"git",url:"https://github.com/kumwe/fixture-dependency.git",reference:$sha},
-  dist:{type:"zip",url:("https://api.github.com/repos/kumwe/fixture-dependency/zipball/"+$sha),reference:$sha}}]}' > "$work/baseline/composer.lock"
+  dist:{type:"zip",url:("https://api.github.com/repos/kumwe/fixture-dependency/zipball/"+$sha),reference:$sha}}]}
+' > "$work/baseline/composer.lock"
 jq -n --arg commit "$commit" --arg digest "$digest" '{
   schema:"kumwe-release-attestation/v2",artifact_kind:"framework_php",
   repository:"https://github.com/kumwe/fixture-dependency",merge_commit:$commit,version:"1.2.3",tag:"v1.2.3",
   source_archive:{url:"https://github.com/kumwe/fixture-dependency/archive/refs/tags/v1.2.3.tar.gz",sha256:$digest},
-  artifacts:[{identity:"Fixture Composer dist",url:("https://api.github.com/repos/kumwe/fixture-dependency/zipball/"+$commit),sha256:$digest}],
+  artifacts:[{identity:"Fixture Composer dist",
+    url:("https://api.github.com/repos/kumwe/fixture-dependency/zipball/"+$commit),sha256:$digest}],
   manifests_and_corpora:[{path:"resources/public-api/v1.json",sha256:$digest}],
   release_workflow:"https://github.com/kumwe/fixture-dependency/actions/runs/123 (release-on-record, success)",
   registry_or_pie_verification:["Fixture registry observation"],
@@ -51,11 +53,14 @@ jq -n --arg commit "$other" --arg sha "${attestation_sha%% *}" '{
     repository:"kumwe/fixture-evidence",commit:$commit,path:"records/RELEASE-ATTESTATION.json",sha256:$sha}}}
 }' > "$work/baseline/resources/release-readiness.json"
 cat > "$work/baseline/api/release.json" <<'JSON'
-{"id":456,"html_url":"https://github.com/kumwe/fixture-dependency/releases/tag/v1.2.3","tag_name":"v1.2.3","draft":false,"prerelease":false,"immutable":true,"published_at":"2026-09-07T11:00:00Z"}
+{"id":456,"html_url":"https://github.com/kumwe/fixture-dependency/releases/tag/v1.2.3",
+ "tag_name":"v1.2.3","draft":false,"prerelease":false,"immutable":true,"published_at":"2026-09-07T11:00:00Z"}
 JSON
 jq -n --arg sha "$commit" '{ref:"refs/tags/v1.2.3",object:{type:"commit",sha:$sha}}' > "$work/baseline/api/tag.json"
 jq -n --arg sha "$commit" '{object:{type:"commit",sha:$sha}}' > "$work/baseline/api/annotated.json"
-jq -n --arg sha "$commit" '{repository:{full_name:"kumwe/fixture-dependency"},head_sha:$sha,status:"completed",conclusion:"success",event:"push",path:".github/workflows/release-on-record.yml"}' > "$work/baseline/api/run.json"
+jq -n --arg sha "$commit" '{repository:{full_name:"kumwe/fixture-dependency"},head_sha:$sha,
+  status:"completed",conclusion:"success",event:"push",path:".github/workflows/release-on-record.yml"}
+' > "$work/baseline/api/run.json"
 
 reset_fixture() {
   rm -rf "$work/case"
@@ -70,7 +75,8 @@ edit() {
 bind_attestation() {
   local observed
   observed="$(sha256sum "$FIXTURE_ROOT/attestation.json")"
-  edit resources/release-readiness.json ".dependencies[\"kumwe/fixture-dependency\"].attestation.sha256 = \"${observed%% *}\""
+  edit resources/release-readiness.json \
+    ".dependencies[\"kumwe/fixture-dependency\"].attestation.sha256 = \"${observed%% *}\""
 }
 count=0
 expect() {
@@ -91,7 +97,8 @@ expect() {
 
 reset_fixture
 expect pass 'exact immutable release with external evidence passes despite historical blocked status'
-jq -e '.status == "verified" and .dependencies[0].commit == "1111111111111111111111111111111111111111"' "$FIXTURE_ROOT/result.json" >/dev/null
+jq -e '.status == "verified" and .dependencies[0].commit == "1111111111111111111111111111111111111111"' \
+  "$FIXTURE_ROOT/result.json" >/dev/null
 edit api/release.json '.immutable=false'
 expect fail 'a failed rerun invalidates earlier passing evidence at the same output path'
 reset_fixture
@@ -107,42 +114,102 @@ edit composer.lock '.packages=[]'
 rm "$FIXTURE_ROOT/resources/release-readiness.json"
 expect pass 'package without Kumwe runtime dependencies needs no evidence coordinates'
 
-while IFS='|' read -r file expression label; do
+while IFS= read -r file && IFS= read -r expression && IFS= read -r label; do
   reset_fixture
   edit "$file" "$expression"
   if [[ "$file" == attestation.json ]]; then bind_attestation; fi
   expect fail "$label"
 done <<'CASES'
-composer.json|.require["kumwe/fixture-dependency"]="^1.2"|ranged dependency is rejected
-composer.lock|.packages=[]|missing or replaced direct dependency is rejected
-composer.lock|.packages += .packages|duplicate locked package is rejected
-composer.lock|.packages[0].version="dev-main"|development version is rejected
-composer.lock|.packages[0].version="v1.2.4"|different resolved stable version is rejected
-composer.lock|.packages[0].dist.reference="2222222222222222222222222222222222222222"|source and dist references must match
-composer.lock|.packages[0].dist.url="https://example.invalid/archive.zip"|foreign dist origin is rejected
-api/release.json|.immutable=false|mutable release is rejected
-api/release.json|del(.immutable)|missing immutable observation is rejected
-api/release.json|.draft=true|draft release is rejected
-api/release.json|.prerelease=true|prerelease is rejected
-api/tag.json|.object.sha="2222222222222222222222222222222222222222"|rebased or moved tag mismatch is rejected
-api/tag.json|.ref="refs/tags/v9.9.9"|different tag identity is rejected
-resources/release-readiness.json|.dependencies["kumwe/fixture-dependency"].attestation=null|missing external attestation is rejected
-resources/release-readiness.json|.dependencies["kumwe/fixture-dependency"].version="1.2.2"|evidence coordinates for another version are rejected
-resources/release-readiness.json|.dependencies["kumwe/fixture-dependency"].attestation.repository="kumwe/fixture-dependency"|self-issued evidence in dependency repository is rejected
-resources/release-readiness.json|.dependencies["kumwe/fixture-dependency"].attestation.commit="main"|moving evidence branch coordinate is rejected
-resources/release-readiness.json|.dependencies["kumwe/fixture-dependency"].attestation.path="records/../RELEASE-ATTESTATION.json"|ambiguous evidence path is rejected
-resources/release-readiness.json|.dependencies["kumwe/fixture-dependency"].attestation.sha256="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"|changed external evidence bytes are rejected
-attestation.json|.status="failed"|failed independent verification cannot become verified
-attestation.json|.version="1.2.2"|attestation for older dependency version is rejected
-attestation.json|.merge_commit="2222222222222222222222222222222222222222"|attestation for a different commit is rejected
-attestation.json|.clean_consumer_or_build_verification=[]|missing independent clean consumer evidence is rejected
-attestation.json|.known_gaps=["Unverified archive"]|known gaps prevent dependency publication
-attestation.json|.artifacts[0].url="https://example.invalid/other.zip"|attested artifact must be the Composer dist
-attestation.json|.release_workflow="https://github.com/kumwe/fixture-dependency/actions/runs/123/attempts/1"|ambiguous workflow coordinate is rejected
-api/run.json|.conclusion="failure"|failed release workflow is rejected
-api/run.json|.head_sha="2222222222222222222222222222222222222222"|successful workflow for another commit is rejected
-api/run.json|.event="pull_request"|branch PR success cannot substitute for released-commit verification
-api/run.json|.path=".github/workflows/ci.yml"|ordinary CI cannot substitute for the publication workflow
+composer.json
+.require["kumwe/fixture-dependency"]="^1.2"
+ranged dependency is rejected
+composer.lock
+.packages=[]
+missing or replaced direct dependency is rejected
+composer.lock
+.packages += .packages
+duplicate locked package is rejected
+composer.lock
+.packages[0].version="dev-main"
+development version is rejected
+composer.lock
+.packages[0].version="v1.2.4"
+different resolved stable version is rejected
+composer.lock
+.packages[0].dist.reference="2222222222222222222222222222222222222222"
+source and dist references must match
+composer.lock
+.packages[0].dist.url="https://example.invalid/archive.zip"
+foreign dist origin is rejected
+api/release.json
+.immutable=false
+mutable release is rejected
+api/release.json
+del(.immutable)
+missing immutable observation is rejected
+api/release.json
+.draft=true
+draft release is rejected
+api/release.json
+.prerelease=true
+prerelease is rejected
+api/tag.json
+.object.sha="2222222222222222222222222222222222222222"
+rebased or moved tag mismatch is rejected
+api/tag.json
+.ref="refs/tags/v9.9.9"
+different tag identity is rejected
+resources/release-readiness.json
+.dependencies["kumwe/fixture-dependency"].attestation=null
+missing external attestation is rejected
+resources/release-readiness.json
+.dependencies["kumwe/fixture-dependency"].version="1.2.2"
+evidence coordinates for another version are rejected
+resources/release-readiness.json
+.dependencies["kumwe/fixture-dependency"].attestation.repository="kumwe/fixture-dependency"
+self-issued evidence in dependency repository is rejected
+resources/release-readiness.json
+.dependencies["kumwe/fixture-dependency"].attestation.commit="main"
+moving evidence branch coordinate is rejected
+resources/release-readiness.json
+.dependencies["kumwe/fixture-dependency"].attestation.path="records/../RELEASE-ATTESTATION.json"
+ambiguous evidence path is rejected
+resources/release-readiness.json
+.dependencies["kumwe/fixture-dependency"].attestation.sha256=("a" * 64)
+changed external evidence bytes are rejected
+attestation.json
+.status="failed"
+failed independent verification cannot become verified
+attestation.json
+.version="1.2.2"
+attestation for older dependency version is rejected
+attestation.json
+.merge_commit="2222222222222222222222222222222222222222"
+attestation for a different commit is rejected
+attestation.json
+.clean_consumer_or_build_verification=[]
+missing independent clean consumer evidence is rejected
+attestation.json
+.known_gaps=["Unverified archive"]
+known gaps prevent dependency publication
+attestation.json
+.artifacts[0].url="https://example.invalid/other.zip"
+attested artifact must be the Composer dist
+attestation.json
+.release_workflow="https://github.com/kumwe/fixture-dependency/actions/runs/123/attempts/1"
+ambiguous workflow coordinate is rejected
+api/run.json
+.conclusion="failure"
+failed release workflow is rejected
+api/run.json
+.head_sha="2222222222222222222222222222222222222222"
+successful workflow for another commit is rejected
+api/run.json
+.event="pull_request"
+branch PR success cannot substitute for released-commit verification
+api/run.json
+.path=".github/workflows/ci.yml"
+ordinary CI cannot substitute for the publication workflow
 CASES
 
 reset_fixture
