@@ -98,11 +98,11 @@ while IFS= read -r locked; do
     (.attestation.repository | type == "string" and test("^kumwe/[a-z0-9][a-z0-9-]*$")) and
     (.attestation.repository != $name) and
     (.attestation.commit | type == "string" and test("^[a-f0-9]{40}$")) and
-    (.attestation.path | type == "string" and test("^[A-Za-z0-9_-][A-Za-z0-9_./-]*\\.json$")) and
+    (.attestation.path | type == "string" and test("^[A-Za-z0-9_-][A-Za-z0-9_./-]*\\.(json|yaml|yml)$")) and
     (.attestation.path | split("/") | all(.[]; . != "." and . != ".." and . != "")) and
     (.attestation.sha256 | type == "string" and test("^[a-f0-9]{64}$"))
   ' "$readiness" >/dev/null ||
-    fail "$name $version needs a digest-pinned external JSON release attestation at a full commit."
+    fail "$name $version needs a digest-pinned external JSON or YAML release attestation at a full commit."
   coordinates="$(jq -c --arg name "$name" '.dependencies[$name].attestation' "$readiness")"
   evidence_repo="$(jq -r .repository <<< "$coordinates")"
   evidence_commit="$(jq -r .commit <<< "$coordinates")"
@@ -113,11 +113,25 @@ while IFS= read -r locked; do
   jq -e --arg path "$evidence_path" '
     .type == "file" and .path == $path and .encoding == "base64" and (.content | type == "string")
   ' "$work/content.json" >/dev/null || fail "$name attestation must be a repository file."
-  jq -r .content "$work/content.json" | base64 --decode > "$work/attestation.json" ||
+  jq -r .content "$work/content.json" | base64 --decode > "$work/attestation.raw" ||
     fail "$name attestation encoding is invalid."
-  actual_sha="$(sha256sum "$work/attestation.json")"
+  actual_sha="$(sha256sum "$work/attestation.raw")"
   [[ "${actual_sha%% *}" == "$evidence_sha" ]] ||
     fail "$name external attestation digest does not match its reviewed coordinate."
+  # Bind the original bytes before parsing; normalized JSON is never the evidence digest.
+  if [[ "$evidence_path" == *.json ]]; then
+    cp "$work/attestation.raw" "$work/attestation.documents.json"
+  else
+    command -v yq >/dev/null || fail 'YAML attestations require Mike Farah yq v4.'
+    yq_version="$(yq --version)" || fail 'cannot inspect the YAML parser version.'
+    [[ "$yq_version" == *mikefarah/yq* && "$yq_version" == *'version v4.'* ]] ||
+      fail 'YAML attestations require Mike Farah yq v4.'
+    yq eval --input-format=yaml --output-format=json '.' "$work/attestation.raw" \
+      > "$work/attestation.documents.json" || fail "$name attestation YAML is invalid."
+  fi
+  jq -e -s 'if length == 1 and (.[0] | type == "object") then .[0] else error("one object required") end' \
+    "$work/attestation.documents.json" > "$work/attestation.json" ||
+    fail "$name attestation must contain exactly one object document."
   jq -e --arg name "$name" --arg version "$version" --arg tag "$tag" --arg commit "$commit" \
     --arg dist "$(jq -r .dist.url <<< "$locked")" '
     def nonempty: type == "string" and length > 0;
