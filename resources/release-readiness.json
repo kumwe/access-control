@@ -1,0 +1,11 @@
+{
+  "status": "blocked",
+  "reason": "The selected Access Context release has no independently verified immutable release evidence.",
+  "dependencies": {
+    "kumwe/access-context": {
+      "version": "0.1.0",
+      "attestation": null
+    }
+  },
+  "required_followup": "Select an independently verified immutable upstream release and commit its exact version and external attestation repository, commit, JSON path and SHA-256 digest. The live dependency checker verifies those observations before publication."
+}
