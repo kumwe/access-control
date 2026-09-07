@@ -102,14 +102,15 @@
     },
     {
       "id": "access-control.membership-directory",
-      "summary": "Exact host-backed membership selection and live freshness port.",
       "symbols": [
         "Kumwe\\Access\\MembershipDirectory"
       ],
       "documentation": [
         "docs/public-api.md",
         "docs/integration.md"
-      ]
+      ],
+      "title": "Exact host-backed membership selection and live freshness port.",
+      "description": "Exact host-backed membership selection and live freshness port."
     }
   ],
   "native_requirements": null,
