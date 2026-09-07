@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Kumwe\Access;
 
 use InvalidArgumentException;
+use Kumwe\Context\Value\SiteContext;
 
 /**
  * Asks every contributed reference inspector and answers with the union of what they find.
@@ -37,6 +38,9 @@ final readonly class CompositeResourceOwnershipReferences implements ResourceOwn
     {
         $held = [];
         foreach ($inspectors as $inspector) {
+            if (!$inspector instanceof ResourceOwnershipReferences) {
+                throw new InvalidArgumentException('Every inspector must implement ResourceOwnershipReferences.');
+            }
             if (count($held) >= 64) {
                 throw new InvalidArgumentException('At most 64 reference inspectors are accepted.');
             }
@@ -57,17 +61,27 @@ final readonly class CompositeResourceOwnershipReferences implements ResourceOwn
      */
     public function sitesReferencing(AuthorizationResource $resource, array $sites): array
     {
-        if (count($sites) > 4096) {
+        if (!array_is_list($sites) || count($sites) > 4096) {
             throw new InvalidArgumentException('At most 4096 site candidates are accepted.');
+        }
+        $candidates = [];
+        foreach ($sites as $site) {
+            if (!is_string($site) || SiteContext::fromString($site)->identifier() !== $site) {
+                throw new InvalidArgumentException('Candidate sites must be canonical string identifiers.');
+            }
+            $candidates[] = $site;
         }
         $referencing = [];
         foreach ($this->inspectors as $inspector) {
-            $returned = $inspector->sitesReferencing($resource, $sites);
-            if (count($returned) > 4096) {
+            $returned = $inspector->sitesReferencing($resource, $candidates);
+            if (!array_is_list($returned) || count($returned) > 4096) {
                 throw new InvalidArgumentException('At most 4096 sites per inspector are accepted.');
             }
             foreach ($returned as $site) {
-                if (in_array($site, $sites, true)) {
+                if (!is_string($site) || SiteContext::fromString($site)->identifier() !== $site) {
+                    throw new InvalidArgumentException('Inspector sites must be canonical string identifiers.');
+                }
+                if (in_array($site, $candidates, true)) {
                     $referencing['id:' . $site] = $site;
                 }
             }

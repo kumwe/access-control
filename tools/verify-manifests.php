@@ -71,8 +71,11 @@ if (is_array($autoload) && is_array($autoload['psr-4'] ?? null) && count($autolo
 if ($package !== 'kumwe/access-control' || $namespace !== 'Kumwe\\Access\\') {
     $failures[] = 'composer.json must name kumwe/access-control with the single PSR-4 root Kumwe\\Access\\.';
 }
-if (($composerJson['require'] ?? null) !== ['php' => '^8.5']) {
-    $failures[] = 'composer.json must require PHP alone; the dependency ceiling of this package is none.';
+if (
+    ($composerJson['require'] ?? null) !== ['php' => '^8.5', 'kumwe/access-context' => '0.1.0',
+    'psr/container' => '^2.0']
+) {
+    $failures[] = 'composer.json must match the reviewed exact draft dependency tuple.';
 }
 
 $release = null;
@@ -203,16 +206,21 @@ if (($capabilities['deprecations'] ?? null) !== []) {
 }
 
 if ($serviceMap !== []) {
-    if (!array_key_exists('config_provider', $serviceMap) || $serviceMap['config_provider'] !== null) {
-        $failures[] = 'resources/service-map/v1.json must declare config_provider: null.';
+    if (($serviceMap['config_provider'] ?? null) !== 'Kumwe\\Access\\ConfigProvider') {
+        $failures[] = 'The service map must declare the canonical ConfigProvider.';
     }
-    $reason = $serviceMap['provider_absence_reason'] ?? null;
-    if (!is_string($reason) || trim($reason) === '') {
-        $failures[] = 'resources/service-map/v1.json must state why no provider exists.';
+    $factories = $serviceMap['factories'] ?? null;
+    if (!is_array($factories)) {
+        $failures[] = 'Factories must be an array.';
+        $factories = [];
     }
-    foreach (['factories', 'aliases', 'delegators', 'configuration_keys'] as $key) {
-        if (($serviceMap[$key] ?? null) !== []) {
-            $failures[] = "resources/service-map/v1.json must declare an empty {$key}.";
+    foreach ($factories as $factory) {
+        if (
+            !is_array($factory) || !is_string($factory['service'] ?? null)
+            || !is_string($factory['factory'] ?? null)
+            || !isset($symbols[$factory['service']], $symbols[$factory['factory']])
+        ) {
+            $failures[] = 'Every factory and service must be a documented public symbol.';
         }
     }
 }
@@ -258,7 +266,7 @@ if ($failures !== []) {
 }
 
 printf(
-    "Manifests agree: %d exported symbols, %d capabilities, no provider, release %s%s.\n",
+    "Manifests agree: %d exported symbols, %d capabilities, explicit provider, release %s%s.\n",
     count($symbols),
     count($ids),
     (string) $release,

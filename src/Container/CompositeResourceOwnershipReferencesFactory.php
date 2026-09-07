@@ -27,18 +27,20 @@ final class CompositeResourceOwnershipReferencesFactory
     public function __invoke(ContainerInterface $container): CompositeResourceOwnershipReferences
     {
         $configuration = $container->get('config');
-        $names = is_array($configuration) ? ($configuration['kumwe']['access']['reference_inspectors'] ?? null) : null;
+        $kumwe = is_array($configuration) ? ($configuration['kumwe'] ?? null) : null;
+        $access = is_array($kumwe) ? ($kumwe['access'] ?? null) : null;
+        $names = is_array($access) ? ($access['reference_inspectors'] ?? null) : null;
         if (!is_array($names) || !array_is_list($names) || count($names) > 64) {
             throw new InvalidArgumentException('Explicit bounded reference_inspectors list configuration is required.');
         }
         $inspectors = [];
         foreach ($names as $name) {
             if (!is_string($name) || $name === CompositeResourceOwnershipReferences::class) {
-                throw new InvalidArgumentException('Reference inspector service names must be explicit and nonrecursive.');
+                throw new InvalidArgumentException('Inspector names must be explicit and nonrecursive.');
             }
             $inspector = $container->get($name);
             if (!$inspector instanceof ResourceOwnershipReferences) {
-                throw new InvalidArgumentException('Every reference inspector must implement ResourceOwnershipReferences.');
+                throw new InvalidArgumentException('Inspectors must implement ResourceOwnershipReferences.');
             }
             $inspectors[] = $inspector;
         }

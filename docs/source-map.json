@@ -141,6 +141,10 @@
     "Kumwe\\Extension\\Spi\\Identity\\Domain\\Capability": {
       "target": "Kumwe\\Access\\Capability",
       "file": "vendor/kumwe/extension-sdk/src/Spi/Identity/Domain/Capability.php"
+    },
+    "Kumwe\\App\\Identity\\Domain\\AuthorizationDecision": {
+      "target": "Kumwe\\Access\\AuthorizationDecision",
+      "file": "src/Identity/Domain/AuthorizationDecision.php"
     }
   }
 }

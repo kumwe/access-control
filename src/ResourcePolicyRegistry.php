@@ -26,6 +26,12 @@ final class ResourcePolicyRegistry
      */
     private array $definitions = [];
 
+    /** Registration-epoch binding; removed/recreated capabilities cannot revive old policies.
+     * @var array<string, CapabilityDefinition>
+     * @since 0.1.0
+     */
+    private array $capabilityBindings = [];
+
     /**
      * Bind the policy registry to the capability catalog it validates references against.
      *
@@ -82,6 +88,7 @@ final class ResourcePolicyRegistry
             throw new InvalidArgumentException('At most 4096 resource policies are accepted.');
         }
         $this->definitions[$definition->id] = $definition;
+        $this->capabilityBindings[$definition->id] = $capability;
     }
 
     /**
@@ -104,7 +111,8 @@ final class ResourcePolicyRegistry
         }
         foreach ($this->definitions as $definition) {
             if (
-                $definition->owner === $registeredCapability->owner
+                ($this->capabilityBindings[$definition->id] ?? null) === $registeredCapability
+                && $definition->owner === $registeredCapability->owner
                 && $definition->enforceable()
                 && $definition->capability->equals($capability)
                 && $definition->matches($resource)
@@ -136,8 +144,9 @@ final class ResourcePolicyRegistry
         }
         $matching = array_filter(
             $this->definitions,
-            static fn (ResourcePolicyDefinition $definition): bool =>
-                $definition->owner === $registeredCapability->owner
+            fn (ResourcePolicyDefinition $definition): bool =>
+                ($this->capabilityBindings[$definition->id] ?? null) === $registeredCapability
+                && $definition->owner === $registeredCapability->owner
                 && $definition->capability->equals($capability) && $definition->enforceable(),
         );
         ksort($matching, SORT_STRING);
@@ -178,7 +187,7 @@ final class ResourcePolicyRegistry
     {
         foreach ($this->definitions as $identifier => $definition) {
             if ($definition->owner === $owner) {
-                unset($this->definitions[$identifier]);
+                unset($this->definitions[$identifier], $this->capabilityBindings[$identifier]);
             }
         }
     }

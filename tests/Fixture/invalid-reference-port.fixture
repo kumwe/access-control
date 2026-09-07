@@ -1,0 +1,11 @@
+<?php
+
+// Deliberately malformed external adapter fixture: native array return typing cannot enforce list<string>.
+declare(strict_types=1);
+
+return new class implements \Kumwe\Access\ResourceOwnershipReferences {
+    public function sitesReferencing(\Kumwe\Access\AuthorizationResource $resource, array $sites): array
+    {
+        return [123];
+    }
+};

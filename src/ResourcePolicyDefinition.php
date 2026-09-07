@@ -83,6 +83,9 @@ final readonly class ResourcePolicyDefinition
         $indexed = [];
         $consumed = 0;
         foreach ($targets as $declaredTarget) {
+            if (!$declaredTarget instanceof ResourcePolicyTarget) {
+                throw new InvalidArgumentException('Every resource-policy target must be a ResourcePolicyTarget.');
+            }
             if (++$consumed > 64) {
                 throw new InvalidArgumentException('A resource policy may consume at most 64 targets.');
             }
@@ -157,11 +160,11 @@ final readonly class ResourcePolicyDefinition
     }
 
     /**
-     * Whether this exact binding grants authority to an unattended identity.
+     * Inspect allowlist membership only; the host/registry must separately enforce lifecycle and authority.
      *
      * @param   string          $identity  Purpose-built identity carried by the execution context.
      *
-     * @return  bool  True when the policy's typed allowlist contains the identity.
+     * @return  bool  True when the immutable allowlist names the identity; this alone never grants permission.
      *
      * @since  0.1.0
      */

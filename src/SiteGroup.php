@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Kumwe\Access;
 
 use Kumwe\Context\Value\SiteContext;
-
 use InvalidArgumentException;
 
 /**
@@ -22,7 +21,11 @@ use InvalidArgumentException;
  */
 final readonly class SiteGroup
 {
-    /** Normalized display name, at most 191 bytes. @var string @since 0.1.0 */
+    /**
+ * Normalized display name, at most 191 bytes.
+ * @var string
+ * @since 0.1.0
+ */
     public string $name;
 
     /**

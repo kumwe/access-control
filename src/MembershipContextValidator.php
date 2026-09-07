@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Kumwe\Access;
 
 use Kumwe\Context\Value\MembershipContext;
-
 use Kumwe\Context\Value\SiteContext;
 
 /**

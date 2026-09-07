@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Kumwe\Access;
 
-
 /**
  * Canonical live registry of capability metadata and owner-bound resource policies.
  *
@@ -34,17 +33,17 @@ final readonly class AuthorizationPolicyRegistry
     private ResourcePolicyRegistry $resourcePolicies;
 
     /**
-     * Create an empty registry ready for the core and active extension contribution phase.
+     * Create an empty registry with explicit host membership-resource policy.
      *
      * The composition root must share this instance with both the contribution registry set and the
      * gateway. Keeping construction empty prevents core from taking a registration path extensions do not.
      *
+     * @param MembershipRequirement $membershipRequirement Explicit host-selected sensitive resource types.
      * @since  0.1.0
      */
     public function __construct(
         private MembershipRequirement $membershipRequirement,
-    )
-    {
+    ) {
         $this->capabilities = new CapabilityDefinitionRegistry();
         $this->resourcePolicies = new ResourcePolicyRegistry($this->capabilities);
     }

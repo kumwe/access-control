@@ -49,6 +49,7 @@ function contextApiMain(array $arguments): int
         return 2;
     }
 
+    require CONTEXT_API_ROOT . '/vendor/autoload.php';
     contextApiRegisterAutoloader();
     $manifest = contextApiManifest();
     $bytes = json_encode(

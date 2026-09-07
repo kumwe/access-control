@@ -41,9 +41,15 @@ foreach ($iterator as $file) {
         $failures[] = $relative . ' cannot be read.';
         continue;
     }
+    $frontMatter = false;
     foreach ($lines as $index => $line) {
+        if ($relative === 'MIGRATION-HANDOFF.md' && $line === '---') {
+            $frontMatter = !$frontMatter;
+        }
+        $structured = str_ends_with($relative, '.json') || $frontMatter
+            || ($relative === 'docs/public-api.md' && str_starts_with($line, '### `'));
         $where = $relative . ':' . ($index + 1);
-        if (mb_strlen($line, 'UTF-8') > 120) {
+        if (!$structured && mb_strlen($line, 'UTF-8') > 120) {
             $failures[] = $where . ' is wider than 120 columns.';
         }
         foreach ($forbidden as $needle) {

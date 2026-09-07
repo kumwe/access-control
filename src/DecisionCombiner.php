@@ -31,6 +31,9 @@ final class DecisionCombiner
         $consumed = 0;
         $ranks = ['deny' => 0, 'step_up' => 1, 'allow' => 2, 'not_applicable' => 3];
         foreach ($decisions as $decision) {
+            if (!$decision instanceof AuthorizationDecision) {
+                throw new InvalidArgumentException('Every decision must be an AuthorizationDecision.');
+            }
             if (++$consumed > 1024) {
                 throw new InvalidArgumentException('At most 1024 decisions may be combined.');
             }
@@ -38,8 +41,10 @@ final class DecisionCombiner
                 $selected === null
                 || $ranks[$decision->state->value] < $ranks[$selected->state->value]
                 || ($decision->state === $selected->state
-                    && strcmp($decision->policy . "\0" . $decision->reason,
-                        $selected->policy . "\0" . $selected->reason) < 0)
+                    && strcmp(
+                        $decision->policy . "\0" . $decision->reason,
+                        $selected->policy . "\0" . $selected->reason
+                    ) < 0)
             ) {
                 $selected = $decision;
             }

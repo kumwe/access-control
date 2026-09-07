@@ -92,11 +92,10 @@ foreach (is_array($capabilities['capabilities'] ?? null) ? $capabilities['capabi
 }
 
 if (
-    !array_key_exists('config_provider', $serviceMap)
-    || $serviceMap['config_provider'] !== null
-    || class_exists('Kumwe\\Access\\ConfigProvider')
+    ($serviceMap['config_provider'] ?? null) !== 'Kumwe\\Access\\ConfigProvider'
+    || !class_exists('Kumwe\\Access\\ConfigProvider')
 ) {
-    $failures[] = 'the service map promises no provider, but one exists or is declared';
+    $failures[] = 'the declared ConfigProvider is absent';
 }
 
 $examples = glob($root . '/examples/*.php');
@@ -123,7 +122,7 @@ if ($failures !== []) {
 }
 
 printf(
-    "Composer autoload smoke passed: %d public symbols loaded, no provider, %d examples ran.\n",
+    "Composer autoload smoke passed: %d public symbols loaded, provider present, %d examples ran.\n",
     count($symbols),
     count($examples),
 );

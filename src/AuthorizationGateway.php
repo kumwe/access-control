@@ -6,7 +6,6 @@ namespace Kumwe\Access;
 
 use Kumwe\Context\Value\ExecutionContext;
 
-
 /**
  * The one port application code asks before it changes or reveals anything.
  *

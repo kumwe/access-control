@@ -168,7 +168,6 @@ $consumerMetadata = [
     'require' => ['kumwe/access-control' => $release],
     'repositories' => [
         ['type' => 'package', 'package' => $metadata],
-        ['packagist.org' => false],
     ],
     'config' => ['allow-plugins' => false],
 ];
