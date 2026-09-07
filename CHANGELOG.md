@@ -2,6 +2,9 @@
 
 ## 0.1.0
 
+- Unify PR and post-rebase release gates, dynamic release identity, tested publication retries,
+  and administrator setup across the package family. Preserve immutable release and dependency evidence requirements.
+
 - Draft extraction of neutral authorization values, four-state decisions, scopes, owner-bound registries and ports.
 - Preserve numeric string identities; refuse raw control bytes and bounded iterable exhaustion.
 - Require explicit host membership and reserved ownership policy configuration.

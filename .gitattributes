@@ -14,3 +14,5 @@
 /phpcs.xml export-ignore
 /phpstan.neon export-ignore
 /vendor export-ignore
+
+/AGENTS.md export-ignore
