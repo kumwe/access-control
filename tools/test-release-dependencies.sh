@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 # Isolated regression fixtures: every network observation is provided by a fake gh.
 set -euo pipefail
+command -v yq >/dev/null || { echo 'Dependency fixtures require Mike Farah yq v4 for real YAML tests.' >&2; exit 1; }
+yq_version="$(yq --version)"
+[[ "$yq_version" == *mikefarah/yq* && "$yq_version" == *'version v4.'* ]] || {
+  echo 'Dependency fixtures require Mike Farah yq v4 for real YAML tests.' >&2
+  exit 1
+}
 checker="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)/check-release-dependencies.sh"
 work="$(mktemp -d)"
 trap 'rm -rf "$work"' EXIT
@@ -16,9 +22,12 @@ case "$4" in
   repos/kumwe/fixture-dependency/releases/tags/v1.2.3) file=release.json ;;
   repos/kumwe/fixture-dependency/git/ref/tags/v1.2.3) file=tag.json ;;
   repos/kumwe/fixture-dependency/git/tags/2222222222222222222222222222222222222222) file=annotated.json ;;
-  repos/kumwe/fixture-evidence/contents/records/RELEASE-ATTESTATION.json?ref=2222222222222222222222222222222222222222)
-    jq -n --arg content "$(base64 < "$FIXTURE_ROOT/attestation.json")" \
-      '{type:"file",path:"records/RELEASE-ATTESTATION.json",encoding:"base64",content:$content}'
+  repos/kumwe/fixture-evidence/contents/records/RELEASE-ATTESTATION.*)
+    [[ "$4" == *'?ref=2222222222222222222222222222222222222222' ]] || exit 92
+    path="${4#repos/kumwe/fixture-evidence/contents/}"
+    path="${path%%\?ref=*}"
+    jq -n --arg path "$path" --arg content "$(base64 < "$FIXTURE_ROOT/attestation.json")" \
+      '{type:"file",path:$path,encoding:"base64",content:$content}'
     exit 0 ;;
   repos/kumwe/fixture-dependency/actions/runs/123) file=run.json ;;
   *) printf 'Unexpected fixture network request: %s\n' "$4" >&2; exit 92 ;;
@@ -77,6 +86,14 @@ bind_attestation() {
   observed="$(sha256sum "$FIXTURE_ROOT/attestation.json")"
   edit resources/release-readiness.json \
     ".dependencies[\"kumwe/fixture-dependency\"].attestation.sha256 = \"${observed%% *}\""
+}
+use_yaml() {
+  yq eval --input-format=json --output-format=yaml --prettyPrint '.' \
+    "$FIXTURE_ROOT/attestation.json" > "$work/attestation.yaml"
+  mv "$work/attestation.yaml" "$FIXTURE_ROOT/attestation.json"
+  edit resources/release-readiness.json \
+    '.dependencies["kumwe/fixture-dependency"].attestation.path="records/RELEASE-ATTESTATION.yaml"'
+  bind_attestation
 }
 count=0
 expect() {
@@ -218,4 +235,32 @@ expect fail 'invalid JSON fails closed before iteration'
 reset_fixture
 rm "$FIXTURE_ROOT/api/release.json"
 expect fail 'release API failure fails closed'
+
+reset_fixture
+use_yaml
+expect pass 'standard YAML attestation is parsed with the real yq implementation'
+edit resources/release-readiness.json \
+  '.dependencies["kumwe/fixture-dependency"].attestation.path="records/RELEASE-ATTESTATION.yml"'
+expect pass 'YML attestation extension is accepted'
+printf '\n# Changed raw evidence bytes\n' >> "$FIXTURE_ROOT/attestation.json"
+expect fail 'YAML formatting changes require a new raw-byte evidence digest'
+reset_fixture
+use_yaml
+printf 'schema: [unterminated\n' > "$FIXTURE_ROOT/attestation.json"
+bind_attestation
+expect fail 'malformed YAML fails closed'
+reset_fixture
+use_yaml
+printf '\n---\nstatus: verified\n' >> "$FIXTURE_ROOT/attestation.json"
+bind_attestation
+expect fail 'multiple YAML documents cannot supply ambiguous verification records'
+reset_fixture
+use_yaml
+printf '%s\n' '- not an attestation object' > "$FIXTURE_ROOT/attestation.json"
+bind_attestation
+expect fail 'YAML root must be an object'
+reset_fixture
+printf '\n{}\n' >> "$FIXTURE_ROOT/attestation.json"
+bind_attestation
+expect fail 'multiple JSON documents cannot supply ambiguous verification records'
 printf 'Dependency release verification: %s fixtures passed.\n' "$count"
