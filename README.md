@@ -3,10 +3,7 @@
 Portable authorization decisions, owner-bound capability/resource-policy registries, scope models and explicit host
 authority ports. Canonical PHP namespace: `Kumwe\Access\`.
 
-**Implemented draft; publication and adoption are blocked.** Development uses exact published `kumwe/access-context
-0.1.0`, which does not have passing independent immutable-release verification. See [dependency
-gate](docs/dependency-gate.md). Do not merge this branch expecting an eligible release: its release workflow
-deliberately stops before mutations until a verified dependency successor and its external evidence are reviewed.
+**Portable runtime is implemented and 0.1.0 is published.** This successor selects exact published `kumwe/access-context 0.1.1`. Package CI and release identity checks gate publication; independent verification gates App adoption. See [dependency state](docs/dependency-gate.md).
 
 ```php
 use Kumwe\Access\AuthorizationDecision;

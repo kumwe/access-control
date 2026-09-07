@@ -31,7 +31,7 @@ target:
   repository: "https://github.com/kumwe/access-control"
   artifact_identity: "kumwe/access-control"
   canonical_namespace_or_abi: "Kumwe\\Access"
-  branch: "agent/access-membership-di-completion"
+  branch: codex/extraction-readiness-20260907
   pull_request: "https://github.com/kumwe/access-control/pull/4"
 ownership:
   responsibility: "Reusable authorization decisions, policies, scopes, ownership, registries and ports."
@@ -988,9 +988,9 @@ documentation:
   integration_or_consumer: "docs/integration.md"
   examples:
     - "examples/policies.php"
-  changelog_record: "CHANGELOG.md ## 0.1.0"
+  changelog_record: "CHANGELOG.md ## 0.1.1"
 release_expectations:
-  version_policy: "Proposed0.1.0; draft publication blocked until exact Context successor independently verified."
+  version_policy: "Successor 0.1.1 uses published Context 0.1.1; independent verification precedes App adoption."
   expected_artifact_types:
     - "Composer package ZIP"
     - "GitHub source archive"
@@ -1142,7 +1142,7 @@ decisions:
   - "User authorized continued draft development; governance release gate remains closed."
 blockers:
   - "Selected Access Context 0.1.0 failed immutable-release verification. No passing external dependency attestation exists."
-  - "Context 0.1.1 release record merged but publication was blocked; no claim it is a dependency release."
+  - "Context 0.1.1 was published at cb6aefd575401192b83700d2d06c739e2a39285f; external adoption verification is separate."
   - "Package publication, independent verification, SDK successor and App adoption remain future tasks."
 ---
 

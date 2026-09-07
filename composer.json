@@ -10,7 +10,7 @@
   },
   "require": {
     "php": "^8.5",
-    "kumwe/access-context": "0.1.0",
+    "kumwe/access-context": "0.1.1",
     "psr/container": "^2.0"
   },
   "require-dev": {

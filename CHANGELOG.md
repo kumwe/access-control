@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1
+
+- Advance the exact Access Context dependency to published 0.1.1 and replace obsolete draft/publication-blocker instructions with the observed release and explicit adoption requirements.
+- Refresh extraction handoff and library-owned validation evidence; App adoption remains a separate task.
+
 ## Unreleased
 
 - Complete Access ownership of the portable MembershipDirectory port (NRM-2026-023).

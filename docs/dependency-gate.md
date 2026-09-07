@@ -1,11 +1,7 @@
-# Dependency release gate
+# Dependency state
 
-This is an implemented draft, not an eligible package release. Executable development checks use exact published
-`kumwe/access-context 0.1.0` (source `34241cbd0cc67934536d2921eca14b063be6fb81`). It failed independent release
-verification because publication was mutable. The merged 0.1.1 release record is not a published dependency. No
-external passing release attestation exists in this draft.
+Access Context 0.1.1 is published at `cb6aefd575401192b83700d2d06c739e2a39285f`; this successor requires that exact stable version. Access Control 0.1.0 was published at `54dbaa1dbffeb09ba390a5e75e8adc951c437a41` with Context 0.1.0. Existing tags and release identities remain unchanged.
 
-The release workflow refuses publication while this gate remains unresolved. A separate commit must select the exact
-independently verified successor, include its authentic external evidence by digest, update the handoff and rerun all
-gates. Merely enabling repository settings, installing the draft, or passing CI does not establish release
-verification. App and SDK adoption wait.
+Publication checks the tested source, package gates and exact stable dependency tag/source/dist identity. The separate strict audit and independent release attestation determine App adoption readiness. No passing external attestation is asserted here.
+
+The published Approval 0.1.0 graph still requires Access 0.1.0 and Context 0.1.0. Its successor must retain that coherent graph until compatible Access and Audit successors have actually been published and verified, then update all three exact requirements together through Composer. Do not substitute `latest`, `dev-main`, wildcard requirements or a guessed future release.
