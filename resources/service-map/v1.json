@@ -21,7 +21,7 @@
       "lifetime": "shared"
     }
   ],
-  "aliases": [],
+  "aliases": {},
   "delegators": [],
   "configuration_keys": [
     {
