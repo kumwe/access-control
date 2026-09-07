@@ -1,117 +1,117 @@
 {
-    "schema": "kumwe-package-capabilities/v1",
-    "package": "kumwe/access-control",
-    "release": "0.1.1",
-    "namespace": "Kumwe\\Access\\",
-    "responsibility": "Reusable authorization decision, policy, scope, ownership, registry and port semantics.",
-    "non_responsibilities": [
-        "Authentication and principal issuance",
-        "App authority, trust activation, persistence, transaction and audit coupling",
-        "Delivery, route middleware and host sensitive resource tables"
-    ],
-    "capabilities": [
-        {
-            "id": "access-control.decisions",
-            "title": "Canonical four-state decision algebra and gateway/audit ports",
-            "description": "Canonical four-state decision algebra and gateway/audit ports",
-            "symbols": [
-                "Kumwe\\Access\\AuthorizationDecision",
-                "Kumwe\\Access\\AuthorizationDecisionRecorder",
-                "Kumwe\\Access\\AuthorizationDenied",
-                "Kumwe\\Access\\AuthorizationGateway",
-                "Kumwe\\Access\\DecisionCombiner",
-                "Kumwe\\Access\\DecisionState"
-            ],
-            "documentation": [
-                "docs/public-api.md",
-                "docs/architecture.md",
-                "docs/integration.md"
-            ]
-        },
-        {
-            "id": "access-control.definitions",
-            "title": "Owner-bound capabilities, explicit membership requirements and deterministic policy registries",
-            "description": "Owner-bound capabilities, explicit membership requirements and deterministic policy registries",
-            "symbols": [
-                "Kumwe\\Access\\AuthorizationDefinitionLifecycle",
-                "Kumwe\\Access\\AuthorizationPolicyRegistry",
-                "Kumwe\\Access\\AuthorizationResource",
-                "Kumwe\\Access\\Capability",
-                "Kumwe\\Access\\CapabilityDefinition",
-                "Kumwe\\Access\\CapabilityDefinitionRegistry",
-                "Kumwe\\Access\\GrantScope",
-                "Kumwe\\Access\\MembershipContextValidator",
-                "Kumwe\\Access\\MembershipRequirement",
-                "Kumwe\\Access\\ResourcePolicyDefinition",
-                "Kumwe\\Access\\ResourcePolicyRegistry",
-                "Kumwe\\Access\\ResourcePolicyTarget"
-            ],
-            "documentation": [
-                "docs/public-api.md",
-                "docs/architecture.md",
-                "docs/integration.md"
-            ]
-        },
-        {
-            "id": "access-control.ownership",
-            "title": "Explicit ownership rules, site-group snapshots, neutral persistence ports and refusal data",
-            "description": "Explicit ownership rules, site-group snapshots, neutral persistence ports and refusal data",
-            "symbols": [
-                "Kumwe\\Access\\AuthorizationResourceOwnershipUnknown",
-                "Kumwe\\Access\\CompositeResourceOwnershipReferences",
-                "Kumwe\\Access\\OwnershipNarrowingRefused",
-                "Kumwe\\Access\\OwnershipNarrowingUnbounded",
-                "Kumwe\\Access\\OwnershipScope",
-                "Kumwe\\Access\\OwnershipScopeChangeRejected",
-                "Kumwe\\Access\\OwnershipScopeLevel",
-                "Kumwe\\Access\\OwnershipScopeNotPermitted",
-                "Kumwe\\Access\\OwnershipScopeNotSiteBound",
-                "Kumwe\\Access\\OwnershipScopeRule",
-                "Kumwe\\Access\\ResourceOwnership",
-                "Kumwe\\Access\\ResourceOwnershipReferences",
-                "Kumwe\\Access\\ResourceOwnershipScopePolicy",
-                "Kumwe\\Access\\ResourceSiteOwnership",
-                "Kumwe\\Access\\ResourceSiteOwnershipConflict",
-                "Kumwe\\Access\\ResourceSiteOwnershipWriter",
-                "Kumwe\\Access\\SiteGroup",
-                "Kumwe\\Access\\SiteGroupRegistry",
-                "Kumwe\\Access\\SiteGroupUnknown",
-                "Kumwe\\Access\\SiteGroupWriter"
-            ],
-            "documentation": [
-                "docs/public-api.md",
-                "docs/architecture.md",
-                "docs/integration.md"
-            ]
-        },
-        {
-            "id": "access-control.composition",
-            "title": "Explicit factories for registries and composed reference inspectors",
-            "description": "Explicit factories for registries and composed reference inspectors",
-            "symbols": [
-                "Kumwe\\Access\\ConfigProvider",
-                "Kumwe\\Access\\Container\\AuthorizationPolicyRegistryFactory",
-                "Kumwe\\Access\\Container\\CompositeResourceOwnershipReferencesFactory",
-                "Kumwe\\Access\\Container\\ResourceOwnershipScopePolicyFactory"
-            ],
-            "documentation": [
-                "docs/public-api.md",
-                "docs/architecture.md",
-                "docs/integration.md"
-            ]
-        },
-        {
-            "id": "access-control.membership-directory",
-            "summary": "Exact host-backed membership selection and live freshness port.",
-            "symbols": [
-                "Kumwe\\Access\\MembershipDirectory"
-            ],
-            "documentation": [
-                "docs/public-api.md",
-                "docs/integration.md"
-            ]
-        }
-    ],
-    "native_requirements": null,
-    "deprecations": []
+  "schema": "kumwe-package-capabilities/v1",
+  "package": "kumwe/access-control",
+  "release": "0.1.1",
+  "namespace": "Kumwe\\Access\\",
+  "responsibility": "Reusable authorization decision, policy, scope, ownership, registry and port semantics.",
+  "non_responsibilities": [
+    "Authentication and principal issuance",
+    "App authority, trust activation, persistence, transaction and audit coupling",
+    "Delivery, route middleware and host sensitive resource tables"
+  ],
+  "capabilities": [
+    {
+      "id": "access-control.decisions",
+      "title": "Canonical four-state decision algebra and gateway/audit ports",
+      "description": "Canonical four-state decision algebra and gateway/audit ports",
+      "symbols": [
+        "Kumwe\\Access\\AuthorizationDecision",
+        "Kumwe\\Access\\AuthorizationDecisionRecorder",
+        "Kumwe\\Access\\AuthorizationDenied",
+        "Kumwe\\Access\\AuthorizationGateway",
+        "Kumwe\\Access\\DecisionCombiner",
+        "Kumwe\\Access\\DecisionState"
+      ],
+      "documentation": [
+        "docs/public-api.md",
+        "docs/architecture.md",
+        "docs/integration.md"
+      ]
+    },
+    {
+      "id": "access-control.definitions",
+      "title": "Owner-bound capabilities, explicit membership requirements and deterministic policy registries",
+      "description": "Owner-bound capabilities, explicit membership requirements and deterministic policy registries",
+      "symbols": [
+        "Kumwe\\Access\\AuthorizationDefinitionLifecycle",
+        "Kumwe\\Access\\AuthorizationPolicyRegistry",
+        "Kumwe\\Access\\AuthorizationResource",
+        "Kumwe\\Access\\Capability",
+        "Kumwe\\Access\\CapabilityDefinition",
+        "Kumwe\\Access\\CapabilityDefinitionRegistry",
+        "Kumwe\\Access\\GrantScope",
+        "Kumwe\\Access\\MembershipContextValidator",
+        "Kumwe\\Access\\MembershipRequirement",
+        "Kumwe\\Access\\ResourcePolicyDefinition",
+        "Kumwe\\Access\\ResourcePolicyRegistry",
+        "Kumwe\\Access\\ResourcePolicyTarget"
+      ],
+      "documentation": [
+        "docs/public-api.md",
+        "docs/architecture.md",
+        "docs/integration.md"
+      ]
+    },
+    {
+      "id": "access-control.ownership",
+      "title": "Explicit ownership rules, site-group snapshots, neutral persistence ports and refusal data",
+      "description": "Explicit ownership rules, site-group snapshots, neutral persistence ports and refusal data",
+      "symbols": [
+        "Kumwe\\Access\\AuthorizationResourceOwnershipUnknown",
+        "Kumwe\\Access\\CompositeResourceOwnershipReferences",
+        "Kumwe\\Access\\OwnershipNarrowingRefused",
+        "Kumwe\\Access\\OwnershipNarrowingUnbounded",
+        "Kumwe\\Access\\OwnershipScope",
+        "Kumwe\\Access\\OwnershipScopeChangeRejected",
+        "Kumwe\\Access\\OwnershipScopeLevel",
+        "Kumwe\\Access\\OwnershipScopeNotPermitted",
+        "Kumwe\\Access\\OwnershipScopeNotSiteBound",
+        "Kumwe\\Access\\OwnershipScopeRule",
+        "Kumwe\\Access\\ResourceOwnership",
+        "Kumwe\\Access\\ResourceOwnershipReferences",
+        "Kumwe\\Access\\ResourceOwnershipScopePolicy",
+        "Kumwe\\Access\\ResourceSiteOwnership",
+        "Kumwe\\Access\\ResourceSiteOwnershipConflict",
+        "Kumwe\\Access\\ResourceSiteOwnershipWriter",
+        "Kumwe\\Access\\SiteGroup",
+        "Kumwe\\Access\\SiteGroupRegistry",
+        "Kumwe\\Access\\SiteGroupUnknown",
+        "Kumwe\\Access\\SiteGroupWriter"
+      ],
+      "documentation": [
+        "docs/public-api.md",
+        "docs/architecture.md",
+        "docs/integration.md"
+      ]
+    },
+    {
+      "id": "access-control.composition",
+      "title": "Explicit factories for registries and composed reference inspectors",
+      "description": "Explicit factories for registries and composed reference inspectors",
+      "symbols": [
+        "Kumwe\\Access\\ConfigProvider",
+        "Kumwe\\Access\\Container\\AuthorizationPolicyRegistryFactory",
+        "Kumwe\\Access\\Container\\CompositeResourceOwnershipReferencesFactory",
+        "Kumwe\\Access\\Container\\ResourceOwnershipScopePolicyFactory"
+      ],
+      "documentation": [
+        "docs/public-api.md",
+        "docs/architecture.md",
+        "docs/integration.md"
+      ]
+    },
+    {
+      "id": "access-control.membership-directory",
+      "summary": "Exact host-backed membership selection and live freshness port.",
+      "symbols": [
+        "Kumwe\\Access\\MembershipDirectory"
+      ],
+      "documentation": [
+        "docs/public-api.md",
+        "docs/integration.md"
+      ]
+    }
+  ],
+  "native_requirements": null,
+  "deprecations": []
 }

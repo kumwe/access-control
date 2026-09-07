@@ -72,10 +72,10 @@ if ($package !== 'kumwe/access-control' || $namespace !== 'Kumwe\\Access\\') {
     $failures[] = 'composer.json must name kumwe/access-control with the single PSR-4 root Kumwe\\Access\\.';
 }
 if (
-    ($composerJson['require'] ?? null) !== ['php' => '^8.5', 'kumwe/access-context' => '0.1.0',
+    ($composerJson['require'] ?? null) !== ['php' => '^8.5', 'kumwe/access-context' => '0.1.1',
     'psr/container' => '^2.0']
 ) {
-    $failures[] = 'composer.json must match the reviewed exact draft dependency tuple.';
+    $failures[] = 'composer.json must match the reviewed exact published dependency tuple.';
 }
 
 $release = null;
