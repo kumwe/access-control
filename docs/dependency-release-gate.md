@@ -1,73 +1,98 @@
-# Dependency release verification
+# Dependency publication and independent verification
 
-The release job runs `bash tools/check-release-dependencies.sh` after a production Composer install and before
-creating a tag. It verifies live upstream publication and independent evidence. Source **Package gate** runs
-the package checks and release automation regressions, including this checker's offline fixtures. Live upstream
-evidence is a publication prerequisite and does not determine whether proposed source changes pass their tests.
+## Normal publication identity check
 
-Version 2 distinguishes `package-implemented`, a complete green implementation PR, from `package-released`, an
-observed publication, and `release-verified`, a published artifact independently verified with a clean consumer.
-Only verified upstream releases permit this package's publication. A passing source gate alone does not prove
-that its selected dependency has reached that state.
+After production Composer installation, the release job runs:
 
-The checker discovers every resolved Kumwe runtime package from `composer.lock`; direct Kumwe requirements in
-`composer.json` must be exact stable versions. Development-only dependencies are excluded.
+```bash
+bash tools/check-package-dependencies.sh .
+```
 
-For each package, the gate reads GitHub's current release, tag and workflow records. Publication must be stable
-and immutable. A lightweight or annotated version tag must resolve to the same full commit as Composer's source
-and dist references. The external attestation must verify that exact version, tag, commit and dist URL, contain
-source/archive and manifest digests, record independent registry and clean-consumer verification, and report no
-known gaps. Its `release-on-record.yml` workflow must have completed successfully at the tagged commit. PR
-head identities are never embedded in this gate: source identities come from the selected dependency release
-at runtime.
+This check runs before creating the dependent package's tag. It discovers every resolved
+Kumwe runtime package from `composer.lock`; direct Kumwe requirements in `composer.json`
+must use exact stable versions. Development-only dependencies are excluded.
 
-`resources/release-readiness.json` provides reviewed evidence coordinates under `dependencies`, keyed by Composer
-package name. Each entry carries the selected exact `version` and an `attestation` object with:
+Each selected runtime dependency must have a published stable GitHub release. Its
+lightweight or annotated version tag must resolve to the exact full commit recorded in
+Composer's source and dist references. The checker validates the release coordinate and
+source/archive identities against the selected package. Missing releases, unstable
+versions, mismatched tags or source/dist identities and failed API reads block publication.
+It does not require GitHub's optional immutable-release flag or an external attestation.
 
-| Field | Required value |
-| --- | --- |
-| `repository` | A separate `kumwe/…` GitHub repository containing independently produced evidence |
-| `commit` | The full 40-character commit containing that evidence |
-| `path` | Repository-relative path ending in `.yaml`, `.yml`, or `.json` |
-| `sha256` | SHA-256 digest of the exact evidence file bytes |
+Source **Package gate** continues to run the complete package checks and release
+regressions, including the dependency identity fixtures. The release workflow repeats
+that gate after rebase and checks live dependency identities on the event's exact commit.
+PR head SHAs are never embedded as future dependency or package release identities.
 
-The evidence uses the existing `kumwe-release-attestation/v2` fields. The protocol's `RELEASE-ATTESTATION.yaml`
-and equivalent `.yml` or `.json` files are accepted. The checker verifies the SHA-256 digest of the downloaded
-file bytes before decoding; it requires exactly one object document and normalizes it to JSON internally.
-YAML input requires Mike Farah `yq` version 4, available on the Ubuntu Actions runner. JSON input uses `jq`.
-The complete regression suite also requires `yq` so YAML coverage cannot silently be skipped.
+Version 2 distinguishes `package-implemented` from observed `package-released` and
+independently established `release-verified`. Passing the publication check does not
+create independent evidence or resolve historical readiness gaps. Preserve the shipped
+handoff and obtain the separate verification needed for SDK or App adoption.
 
-The `release_workflow` accepts the GitHub run URL, optionally followed by a parenthesized note. Format conversion
-preserves all independent release, artifact, manifest and consumer evidence checks. The checker does not
-generate an attestation or turn a successful local build into independent verification.
+## Optional strict evidence audit
 
-A historical top-level `status` does not grant or refuse permission by itself. Missing coordinates, null
-attestations, stale digests, different selected versions, mutable releases, and failed observations all fail
-closed with a specific diagnostic. Successful verification does not rewrite the historical readiness file.
-An optional second argument writes a fresh machine-readable verification result, invalidating any earlier
-passing result before verification begins:
+`tools/check-release-dependencies.sh` remains available for a separate strict audit:
 
 ```bash
 bash tools/check-release-dependencies.sh . "$RUNNER_TEMP/dependency-verification.json"
 ```
 
-To clear a blocked dependency, first publish a new immutable successor when the existing release is mutable;
-never move a released tag or treat enabling immutability as proof that an old release became immutable. Have
-an independent verifier inspect that exact successor, its source and Composer archives, manifests, registry
-metadata and isolated no-dev consumer, and commit its authentic external attestation. Then update the exact
-Composer pin, the matching evidence coordinates, and any dependency version recorded in manifests, handoff
-or checks. Resolve Composer again and run the package gates and this live checker. Until these facts exist,
-dependent publication remains blocked. Repository settings alone cannot update a dependency pin or supply its
-independent verification. The release job checks the selected dependency evidence again on the actual merged
-commit, after the complete source gate passes.
+This audit is not called by the normal publisher. In addition to stable publication and
+tag/source/dist identity, it requires a platform-immutable upstream release, a successful
+`release-on-record.yml` workflow at the tagged commit and independent external evidence.
+The attestation must bind the exact version, tag, commit and dist URL, contain source/archive
+and manifest digests, record registry and clean-consumer verification, and report no
+known gaps. A mutable release cannot satisfy this stricter audit.
 
-The publisher also verifies this repository's live default-branch protection. Complete the administrator setup
-audit in `docs/repository-release-setup.md` for required checks and immutable-release configuration. The optional
-`bash tools/configure-release-repositories.sh --apply --dispatch` verifies setup and requests default-branch
-release runs. Dispatch does not establish dependency readiness or publication; inspect each run and its logs.
-Declare the dependent package released only after its publication workflow succeeds and its immutable release
-is present, then obtain its independent verification before downstream use.
+`resources/release-readiness.json` provides reviewed evidence coordinates under
+`dependencies`, keyed by Composer package name. Each entry has the selected exact
+`version` and an `attestation` object:
 
-Run `bash tools/test-release-dependencies.sh` for the isolated regression suite. Its fake GitHub responses prove
-valid releases pass and mutable releases, stale source/dist identities, missing or changed evidence and failed
-released-commit workflows fail. The fixtures make no network requests and do not alter published releases.
+| Field | Required value |
+| --- | --- |
+| `repository` | A separate `kumwe/…` repository containing independently produced evidence |
+| `commit` | The full 40-character commit containing that evidence |
+| `path` | Repository-relative path ending in `.yaml`, `.yml`, or `.json` |
+| `sha256` | SHA-256 digest of the exact evidence file bytes |
+
+The audit accepts the existing `kumwe-release-attestation/v2` fields in
+`RELEASE-ATTESTATION.yaml` or equivalent `.yml` and `.json` files. It verifies the downloaded
+bytes' SHA-256 digest before decoding, requires one object document and normalizes it to
+JSON. YAML needs Mike Farah `yq` version 4; JSON uses `jq`. The complete strict-audit
+regression suite requires `yq` so YAML coverage cannot silently be skipped.
+
+`release_workflow` accepts the GitHub run URL, optionally followed by a parenthesized
+note. The audit never generates an attestation or treats a local build as independent
+verification. A historical top-level `status` neither grants nor refuses permission by
+itself. Missing coordinates, null attestations, stale digests, differing selected versions,
+mutable releases and failed observations produce specific audit failures.
+
+Successful auditing does not rewrite the historical readiness file. Its optional second
+argument writes a fresh machine-readable result and invalidates an earlier passing result
+before verification begins. These strict audit results support `release-verified` and
+adoption decisions separately from normal publication.
+
+## Updating dependencies and reporting evidence
+
+For normal publication, select an exact published stable version, update Composer and
+the matching dependency versions in manifests, handoff and consumer checks, resolve again,
+and run the full source gate and publication identity check. Preserve runtime behavior and
+clean no-dev registry/archive consumer verification; do not substitute a path repository.
+
+For a strict audit requiring platform immutability, an existing mutable release remains
+mutable after repository settings change. Use an unused immutable successor when needed;
+never move a released tag or replace its artifact. Have an independent verifier inspect
+the exact source, Composer archive, manifests, registry metadata and clean consumer, then
+record the authentic attestation and digest. Normal publication does not invent that evidence.
+
+[Repository hardening](repository-release-setup.md) is optional. Its administrator helper
+can audit or apply branch rules and future immutable publication when explicitly invoked;
+it is not a publisher prerequisite and does not supply dependency evidence. Existing
+GitHub rules and permissions remain effective. A queued workflow does not prove a release;
+confirm the successful publication run and actual release/tag metadata. Describe a release
+as platform-immutable only when GitHub confirms it, and obtain independent evidence before
+claiming `release-verified` or downstream adoption readiness.
+
+The dependency identity fixtures and `bash tools/test-release-dependencies.sh` strict-audit
+fixtures run offline with fake GitHub responses. Keep both aligned with their respective
+checks; neither changes published releases or establishes live independent evidence.

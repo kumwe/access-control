@@ -45,10 +45,10 @@ jobs:
           tools: composer:v2
       - name: Resolve production dependencies from the registry
         run: composer install --no-dev --prefer-dist --no-interaction --no-progress --classmap-authoritative
-      - name: Verify the actual upstream releases and external attestations
+      - name: Verify published dependency versions and source references
         env:
           GH_TOKEN: ${{ github.token }}
-        run: bash tools/check-release-dependencies.sh . "$RUNNER_TEMP/dependency-verification.json"
+        run: bash tools/check-package-dependencies.sh . "$RUNNER_TEMP/package-dependencies.json"
 
       - name: Publish or verify the recorded release
         env:
