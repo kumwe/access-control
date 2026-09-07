@@ -61,7 +61,8 @@ $layers = [
         'ResourceOwnershipScopePolicyFactory'],
 ];
 $runtimeSelection = ['class_alias', 'class_exists', 'interface_exists', 'extension_loaded', 'function_exists',
-    'ffi', 'getenv', 'time', 'microtime', 'hrtime', 'random_bytes', 'random_int', 'file_get_contents', 'file_put_contents',
+    'ffi', 'getenv', 'time', 'microtime', 'hrtime', 'random_bytes', 'random_int',
+    'file_get_contents', 'file_put_contents',
     'fopen', 'exec', 'shell_exec', 'system', 'passthru', 'unserialize', 'serialize', 'session_start'];
 $errors = [];
 $files = [];
@@ -206,4 +207,4 @@ if ($errors !== []) {
 }
 
 echo 'Architecture verified: ' . count($files)
-    . " source files under Kumwe\\Access, no host, driver or container coupling.\n";
+    . " source files under Kumwe\\Access, no host/driver coupling; container access limited to factories.\n";
