@@ -47,7 +47,7 @@ ownership:
     - path: resources/public-api/v1.json
       sha256: f202b449f5fa2d508fc8055bd959d57cc481a2ec1ce5370981ba0b70918ac4e1
     - path: resources/capabilities/v1.json
-      sha256: c5124e487efb8829a18dff3e8a962949a191a0723ee13261b9cb50577614c5f8
+      sha256: beb94ed89c32a3f50719d3b9b0735bd13cb5403e61d12a19caf5178758372c1e
     - path: resources/service-map/v1.json
       sha256: 5dd359c0e04cd5fde84683790e85a8270cec7a955d91c9fc7e55e4af722db2af
   intentionally_excluded:
@@ -1145,7 +1145,7 @@ blockers:
   - "Published Access 0.1.0 remains intact; consumers advance only after this successor is actually published."
 ---
 
-# Migration/implementation summary
+## Migration/implementation summary
 
 43 types; deterministic decision algebra, capability/policy ownership registries, scope/delegation and membership
 ports, three explicit factories. All existing ownership, collision, lifecycle removal, scope and container
@@ -1162,7 +1162,7 @@ This successor selects exact published Context 0.1.1. Its release must exist bef
 requirement. [Current release/dependency observations](docs/readiness-review.md) supersede obsolete
 initial-extraction publication blockers. No independent attestation is fabricated.
 
-## Consumer inventory and drift check
+## Consumer inventory
 
 The source/consumer mappings above remain the adoption inventory. The later MembershipDirectory extraction is
 recorded in docs/membership-source-map.json at App 24ecf956423c18933e824b43cea1bfb9127a79a9. Its canonical owner is
@@ -1183,7 +1183,12 @@ Review [PR #6](https://github.com/kumwe/access-control/pull/6), require its comp
 maintainer merge. Independently verify the published successor and exact dependency graph before App adoption.
 Existing published releases stay intact. This task does not implement the App runtime cutover.
 
-## Validation recipe
+## Drift check
+
+Reconcile mapped source and tests against the recorded App baseline and current App before any adoption.
+Newer portable behavior must move upstream first; preserve App authority, persistence and integration tests.
+
+## Validation recipe and observed local results
 
 Run `composer check` and the repository release automation regressions. Runtime suites, strict static analysis,
 coding standards, manifest/API checks and the no-dev authoritative archive consumer remain required. Final tested
