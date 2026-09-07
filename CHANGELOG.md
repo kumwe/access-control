@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Complete Access ownership of the portable MembershipDirectory port (NRM-2026-023).
+- Verify real Laminas ServiceManager resolution, shared lifetimes and missing-policy refusals in archive consumers.
+
 ## 0.1.0
 
 - Unify PR and post-rebase release gates, dynamic release identity, tested publication retries,

@@ -145,6 +145,10 @@
     "Kumwe\\App\\Identity\\Domain\\AuthorizationDecision": {
       "target": "Kumwe\\Access\\AuthorizationDecision",
       "file": "src/Identity/Domain/AuthorizationDecision.php"
+    },
+    "Kumwe\\App\\BusinessSecurity\\Application\\MembershipDirectory": {
+      "target": "Kumwe\\Access\\MembershipDirectory",
+      "file": "src/BusinessSecurity/Application/MembershipDirectory.php"
     }
   }
 }
