@@ -49,7 +49,7 @@ ownership:
     - path: resources/capabilities/v1.json
       sha256: beb94ed89c32a3f50719d3b9b0735bd13cb5403e61d12a19caf5178758372c1e
     - path: resources/service-map/v1.json
-      sha256: 5dd359c0e04cd5fde84683790e85a8270cec7a955d91c9fc7e55e4af722db2af
+      sha256: c514f5b982627b8ec7027dfe51ed5d8521d8f3028ae2860df27ac9aafc97936a
   intentionally_excluded:
     - "Eight Context types already have another package owner."
     - "Seven App authorization types retain authority/orchestration."
