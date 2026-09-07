@@ -63,8 +63,8 @@ final readonly class AuthorizationResource
     /**
      * Name one addressable resource within a family.
      *
-     * Surrounding whitespace is stripped before validation, so a raw route segment or request field can be
-     * handed over as it arrived.
+     * Raw ASCII controls are refused before trimming ordinary surrounding spaces. A raw request field can be
+     * handed over explicitly; malformed input fails rather than losing forbidden bytes.
      *
      * @param   string  $type        Resource family the identifier belongs to.
      * @param   string  $identifier  Identity of the resource, usually its primary key or slug.

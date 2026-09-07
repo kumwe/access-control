@@ -68,8 +68,8 @@ final readonly class GrantScope
     /**
      * Build a scope restricted to one identified resource.
      *
-     * The type is trimmed and lowercased and the identifier trimmed before either is judged, so values
-     * read back from configuration or a stored row need no cleaning first. `global` is refused as a
+     * Raw ASCII controls in either input are refused before normalization. The type is then trimmed and
+     * lowercased and the identifier trimmed. `global` is refused as a
      * type here because the unrestricted scope carries no identifier and must come from `global()`.
      *
      * @param   string  $type        Kind of resource the grant is limited to, such as `site`.
