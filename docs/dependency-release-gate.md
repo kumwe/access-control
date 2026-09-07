@@ -8,7 +8,8 @@ For each package, the gate reads GitHub's current release, tag and workflow reco
 and immutable. A lightweight or annotated version tag must resolve to the same full commit as Composer's source
 and dist references. The external attestation must verify that exact version, tag, commit and dist URL, contain
 source/archive and manifest digests, record independent registry and clean-consumer verification, and report no
-known gaps. Its `release-on-record.yml` workflow must have completed successfully at the tagged commit. PR head identities are
+known gaps. Its `release-on-record.yml` workflow must have completed successfully at the tagged commit. PR
+head identities are
 never embedded in this gate: all source identities come from the selected dependency release at runtime.
 
 `resources/release-readiness.json` provides reviewed evidence coordinates under `dependencies`, keyed by Composer
