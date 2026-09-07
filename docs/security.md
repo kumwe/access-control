@@ -11,5 +11,6 @@ architecture/API and hostile-input tests. A passing package suite does not certi
 persistence adapters.
 
 SemVer applies to proposed public APIs after release. Pre-1.0 Kumwe dependencies are exact pins; the draft uses
-exact published Context 0.1.1 in this successor. Clean-break decisions AC-001 through 007 are explicit initial-release
+exact published Context 0.1.1 in this successor. Clean-break decisions AC-001 through 007 are explicit
+initial-release
 changes; no historical aliases, fallbacks or dual runtime owners are provided.

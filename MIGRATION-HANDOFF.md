@@ -32,7 +32,7 @@ target:
   artifact_identity: "kumwe/access-control"
   canonical_namespace_or_abi: "Kumwe\\Access"
   branch: codex/extraction-readiness-20260907
-  pull_request: "https://github.com/kumwe/access-control/pull/4"
+  pull_request: https://github.com/kumwe/access-control/pull/6
 ownership:
   responsibility: "Reusable authorization decisions, policies, scopes, ownership, registries and ports."
   non_responsibilities:
@@ -45,11 +45,11 @@ ownership:
   next_consumer: "kumwe/extension-sdk"
   public_manifests:
     - path: resources/public-api/v1.json
-      sha256: "cbe368cbf9bd9ba4a746aca08be1446f4d6c1b584944b9ba698917c6af40a502"
+      sha256: f202b449f5fa2d508fc8055bd959d57cc481a2ec1ce5370981ba0b70918ac4e1
     - path: resources/capabilities/v1.json
-      sha256: "69ab2fa6c8202f726ebdf5a54191aec6d89411bf617d656470435721e3284ec2"
+      sha256: c5124e487efb8829a18dff3e8a962949a191a0723ee13261b9cb50577614c5f8
     - path: resources/service-map/v1.json
-      sha256: "05309b1f43fe60410b256d851c373e54dd83ae3456e6b65fbefb6efa850e57de"
+      sha256: 5dd359c0e04cd5fde84683790e85a8270cec7a955d91c9fc7e55e4af722db2af
   intentionally_excluded:
     - "Eight Context types already have another package owner."
     - "Seven App authorization types retain authority/orchestration."
@@ -78,7 +78,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\AuthorizationDecisionRecorder"
       new_fqcn: "Kumwe\\Access\\AuthorizationDecisionRecorder"
       source_path: src/Application/Authorization/AuthorizationDecisionRecorder.php
@@ -91,7 +91,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\AuthorizationDefinitionLifecycle"
       new_fqcn: "Kumwe\\Access\\AuthorizationDefinitionLifecycle"
       source_path: src/Application/Authorization/AuthorizationDefinitionLifecycle.php
@@ -108,7 +108,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\AuthorizationDenied"
       new_fqcn: "Kumwe\\Access\\AuthorizationDenied"
       source_path: src/Application/Authorization/AuthorizationDenied.php
@@ -128,7 +128,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\AuthorizationGateway"
       new_fqcn: "Kumwe\\Access\\AuthorizationGateway"
       source_path: src/Application/Authorization/AuthorizationGateway.php
@@ -143,7 +143,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\AuthorizationPolicyRegistry"
       new_fqcn: "Kumwe\\Access\\AuthorizationPolicyRegistry"
       source_path: src/Application/Authorization/AuthorizationPolicyRegistry.php
@@ -169,7 +169,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\AuthorizationResource"
       new_fqcn: "Kumwe\\Access\\AuthorizationResource"
       source_path: src/Application/Authorization/AuthorizationResource.php
@@ -185,7 +185,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\AuthorizationResourceOwnershipUnknown"
       new_fqcn: "Kumwe\\Access\\AuthorizationResourceOwnershipUnknown"
       source_path: src/Application/Authorization/AuthorizationResourceOwnershipUnknown.php
@@ -198,7 +198,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\Extension\\Spi\\Identity\\Domain\\Capability"
       new_fqcn: "Kumwe\\Access\\Capability"
       source_path: vendor/kumwe/extension-sdk/src/Spi/Identity/Domain/Capability.php
@@ -214,7 +214,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\CapabilityDefinition"
       new_fqcn: "Kumwe\\Access\\CapabilityDefinition"
       source_path: src/Application/Authorization/CapabilityDefinition.php
@@ -240,7 +240,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\CapabilityDefinitionRegistry"
       new_fqcn: "Kumwe\\Access\\CapabilityDefinitionRegistry"
       source_path: src/Application/Authorization/CapabilityDefinitionRegistry.php
@@ -257,7 +257,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\CompositeResourceOwnershipReferences"
       new_fqcn: "Kumwe\\Access\\CompositeResourceOwnershipReferences"
       source_path: src/Application/Authorization/CompositeResourceOwnershipReferences.php
@@ -271,7 +271,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Identity\\Domain\\GrantScope"
       new_fqcn: "Kumwe\\Access\\GrantScope"
       source_path: src/Identity/Domain/GrantScope.php
@@ -290,7 +290,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\MembershipContextValidator"
       new_fqcn: "Kumwe\\Access\\MembershipContextValidator"
       source_path: src/Application/Authorization/MembershipContextValidator.php
@@ -303,7 +303,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\OwnershipNarrowingRefused"
       new_fqcn: "Kumwe\\Access\\OwnershipNarrowingRefused"
       source_path: src/Application/Authorization/OwnershipNarrowingRefused.php
@@ -317,7 +317,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\OwnershipNarrowingUnbounded"
       new_fqcn: "Kumwe\\Access\\OwnershipNarrowingUnbounded"
       source_path: src/Application/Authorization/OwnershipNarrowingUnbounded.php
@@ -330,7 +330,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\OwnershipScope"
       new_fqcn: "Kumwe\\Access\\OwnershipScope"
       source_path: src/Application/Authorization/OwnershipScope.php
@@ -354,7 +354,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\OwnershipScopeChangeRejected"
       new_fqcn: "Kumwe\\Access\\OwnershipScopeChangeRejected"
       source_path: src/Application/Authorization/OwnershipScopeChangeRejected.php
@@ -367,7 +367,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\OwnershipScopeLevel"
       new_fqcn: "Kumwe\\Access\\OwnershipScopeLevel"
       source_path: src/Application/Authorization/OwnershipScopeLevel.php
@@ -384,7 +384,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\OwnershipScopeNotPermitted"
       new_fqcn: "Kumwe\\Access\\OwnershipScopeNotPermitted"
       source_path: src/Application/Authorization/OwnershipScopeNotPermitted.php
@@ -397,7 +397,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\OwnershipScopeNotSiteBound"
       new_fqcn: "Kumwe\\Access\\OwnershipScopeNotSiteBound"
       source_path: src/Application/Authorization/OwnershipScopeNotSiteBound.php
@@ -410,7 +410,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\OwnershipScopeRule"
       new_fqcn: "Kumwe\\Access\\OwnershipScopeRule"
       source_path: src/Application/Authorization/OwnershipScopeRule.php
@@ -427,7 +427,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\ResourceOwnership"
       new_fqcn: "Kumwe\\Access\\ResourceOwnership"
       source_path: src/Application/Authorization/ResourceOwnership.php
@@ -442,7 +442,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\ResourceOwnershipReferences"
       new_fqcn: "Kumwe\\Access\\ResourceOwnershipReferences"
       source_path: src/Application/Authorization/ResourceOwnershipReferences.php
@@ -455,7 +455,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\ResourceOwnershipScopePolicy"
       new_fqcn: "Kumwe\\Access\\ResourceOwnershipScopePolicy"
       source_path: src/Application/Authorization/ResourceOwnershipScopePolicy.php
@@ -472,7 +472,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\ResourcePolicyDefinition"
       new_fqcn: "Kumwe\\Access\\ResourcePolicyDefinition"
       source_path: src/Application/Authorization/ResourcePolicyDefinition.php
@@ -498,7 +498,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\ResourcePolicyRegistry"
       new_fqcn: "Kumwe\\Access\\ResourcePolicyRegistry"
       source_path: src/Application/Authorization/ResourcePolicyRegistry.php
@@ -516,7 +516,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\ResourcePolicyTarget"
       new_fqcn: "Kumwe\\Access\\ResourcePolicyTarget"
       source_path: src/Application/Authorization/ResourcePolicyTarget.php
@@ -534,7 +534,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\ResourceSiteOwnership"
       new_fqcn: "Kumwe\\Access\\ResourceSiteOwnership"
       source_path: src/Application/Authorization/ResourceSiteOwnership.php
@@ -547,7 +547,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\ResourceSiteOwnershipConflict"
       new_fqcn: "Kumwe\\Access\\ResourceSiteOwnershipConflict"
       source_path: src/Application/Authorization/ResourceSiteOwnershipConflict.php
@@ -560,7 +560,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\ResourceSiteOwnershipWriter"
       new_fqcn: "Kumwe\\Access\\ResourceSiteOwnershipWriter"
       source_path: src/Application/Authorization/ResourceSiteOwnershipWriter.php
@@ -575,7 +575,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\SiteGroup"
       new_fqcn: "Kumwe\\Access\\SiteGroup"
       source_path: src/Application/Authorization/SiteGroup.php
@@ -592,7 +592,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\SiteGroupRegistry"
       new_fqcn: "Kumwe\\Access\\SiteGroupRegistry"
       source_path: src/Application/Authorization/SiteGroupRegistry.php
@@ -606,7 +606,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\SiteGroupUnknown"
       new_fqcn: "Kumwe\\Access\\SiteGroupUnknown"
       source_path: src/Application/Authorization/SiteGroupUnknown.php
@@ -619,7 +619,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Application\\Authorization\\SiteGroupWriter"
       new_fqcn: "Kumwe\\Access\\SiteGroupWriter"
       source_path: src/Application/Authorization/SiteGroupWriter.php
@@ -634,7 +634,7 @@ framework_php:
       exceptions:
         - "InvalidArgumentException"
       serialization_contract: "Exact public member contracts and invariants in docs/public-api.md."
-      compatibility: "Proposed0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
+      compatibility: "Published 0.1.0 clean breaks AC-001 through AC-007; see docs/architecture.md."
     - old_fqcn: "Kumwe\\App\\Identity\\Domain\\AuthorizationDecision"
       new_fqcn: "Kumwe\\Access\\AuthorizationDecision"
       source_path: src/Identity/Domain/AuthorizationDecision.php
@@ -1138,79 +1138,52 @@ governance:
   completion_claim: false
 decisions:
   - "AC-001 through AC-007: see docs/architecture.md."
-  - "35 existing symbols plus 7 new explicit decision/composition types; no App production edits."
-  - "User authorized continued draft development; governance release gate remains closed."
+  - "43 public symbols include the later MembershipDirectory extraction; no App production edits."
+  - "This successor uses exact Context 0.1.1; publication and independent adoption verification remain distinct."
 blockers:
-  - "Selected Access Context 0.1.0 failed immutable-release verification. No passing external dependency attestation exists."
-  - "Context 0.1.1 was published at cb6aefd575401192b83700d2d06c739e2a39285f; external adoption verification is separate."
-  - "Package publication, independent verification, SDK successor and App adoption remain future tasks."
+  - "Independent verification of this successor and exact dependencies remains required before App adoption."
+  - "Published Access 0.1.0 remains intact; consumers advance only after this successor is actually published."
 ---
 
-# Access Control draft handoff
+# Migration/implementation summary
 
-## Migration/implementation summary
-
-42 public types factor portable authorization from App and SDK. No host runtime is adopted; publication is
-deliberately blocked pending independently verified Context dependency correction.
+43 types; deterministic decision algebra, capability/policy ownership registries, scope/delegation and membership
+ports, three explicit factories. All existing ownership, collision, lifecycle removal, scope and container
+conformance suites stay in the library.
 
 ## Public API and responsibility
 
-Every public type/member is documented in docs/public-api.md and reflected into resources/public-api/v1.json. Four
-capability groups and explicit service construction are separately manifested. See CHARTER.md and
-docs/architecture.md.
+The symbol map above and [public API](docs/public-api.md) define every exported contract.
+[Architecture](docs/architecture.md) and [integration](docs/integration.md) retain the host boundaries.
 
 ## Capability reuse/semantic input review
 
-Exact source provenance appears above. Access Context owns the explicit context values. SDK Capability transfers here
-only in a later verified successor train. The unverified Context development pin is never an attestation.
+This successor selects exact published Context 0.1.1. Its release must exist before consumers advance their Access
+requirement. [Current release/dependency observations](docs/readiness-review.md) supersede obsolete
+initial-extraction publication blockers. No independent attestation is fabricated.
 
-## Consumer inventory
+## Consumer inventory and drift check
 
-The complete generated source/import/same-namespace search is frozen in docs/consumer-inventory.json. It includes
-183production, 98test and 0configuration/tool paths. Review semantics rather than bulk-renaming host authority.
+The source/consumer mappings above remain the adoption inventory. The later MembershipDirectory extraction is
+recorded in docs/membership-source-map.json at App 24ecf956423c18933e824b43cea1bfb9127a79a9. Its canonical owner is
+Kumwe\Access\MembershipDirectory; retain the host DoctrineMembershipDirectory and live membership tests. Compare every mapped file and public signature
+against the recorded full App baseline and current App before consumer changes. Any newer portable behavior goes
+upstream first. Preserve App authority, adapters and workflows.
 
 ## Test ownership
 
-Package-owned behavior/boundary/conformance evidence is enforced by tests/ownership.json and composer test:ownership.
-The move/split/retain plan in docs/testing.md preserves actual App security, DB, delivery and lifecycle tests until
-verified adoption removes duplicate portable units.
+Package tests own portable behavior, boundary/conformance, API and construction. App retains actual authorization,
+transaction atomicity, persistence, concurrency, recovery and delivery tests. Remove only duplicate portable
+implementation tests during the separate verified adoption.
 
 ## Next-task execution notes
 
-Follow docs/dependency-gate.md first; no release eligibility is claimed. Only after independent package release
-verification may a separate SDK successor replace canonical Capability and compose contribution semantics, followed by
-verified SDK release and a separate App adoption. See file-specific source and consumer maps.
+Review [PR #6](https://github.com/kumwe/access-control/pull/6), require its complete package gate, then let the
+maintainer merge. Independently verify the published successor and exact dependency graph before App adoption.
+Existing published releases stay intact. This task does not implement the App runtime cutover.
 
-## Drift check
+## Validation recipe
 
-Compare App and SDK current source with the full frozen baseline SHAs before any adoption. New portable behavior must
-return upstream through a separately verified release. Do not add aliases, fallback paths, duplicate owners or
-hand-edited lockfiles.
-
-## Validation recipe and observed local results
-
-PHP 8.5 package tests, strict static analysis, coding standards, manifest/schema/API checks, Composer audit and real
-ZIP dependency consumer are the required final gates. The PR records their observed final-head outcomes externally. No
-future commit/tag/archive identity or attestation is fabricated in this handoff.
-
-## Membership and consumer-container completion (NRM-2026-023)
-
-This successor checkpoint is tracked by PR #4. The original KUMWE-MIG-2026-009
-source provenance above remains valid for its extracted classes. The additive
-MembershipDirectory extraction was checked at App 24ecf956423c18933e824b43cea1bfb9127a79a9.
-The exact symbol, file and consumer inventory is docs/membership-source-map.json.
-Replace its old App FQCN with Kumwe\Access\MembershipDirectory in every listed
-consumer only after a verified successor release. Delete the old interface then;
-retain DoctrineMembershipDirectory and all DB/current-membership authority tests.
-No implementation is copied to Approval.
-
-MembershipDirectoryTest owns inherited signature/default conformance and absence
-of an implicit authority binding. Real ServiceManager integration now resolves
-every declared service from the no-dev archive consumer, verifies shared lifetime,
-checks missing configuration refusals and rejects an implicit gateway. The host
-consumer explicitly requires Laminas; it remains outside portable runtime dependencies.
-
-A new immutable version record must be selected once upstream release evidence is
-verified. The existing 0.1.0 manifest release coordinate is development metadata,
-not a claim that the additional API is present in an existing released artifact.
-Final release identity and all digest attestations remain external.
+Run `composer check` and the repository release automation regressions. Runtime suites, strict static analysis,
+coding standards, manifest/API checks and the no-dev authoritative archive consumer remain required. Final tested
+source and archive identities belong in external CI/attestation evidence.

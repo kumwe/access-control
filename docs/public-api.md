@@ -1,12 +1,16 @@
 # Public API
 
 This document inventories every public type and member. Parameters and return shapes below are exact PHP contracts;
-the corresponding source PHPDoc states invariants, exceptions and side effects. The published API and this successor are distinguished in MIGRATION-HANDOFF.md.md.
+the corresponding source PHPDoc states invariants, exceptions and side effects. The published API and this
+successor are distinguished in MIGRATION-HANDOFF.md.
 
-Values are final/readonly unless explicitly mutable; no value performs I/O or starts a transaction. Registries retain
+Values are final/readonly unless explicitly mutable; no value performs I/O or starts a transaction. Registries
+retain
 per-container bootstrap state and have no process synchronization. Host ports specify responsibilities but ship no
-authority/persistence adapter. PHP exceptions inherit their standard Throwable API and do not confer authority. Enum
-cases use stable strings. Factory failures never synthesize defaults. Bounds and initial clean-break decisions AC-001
+authority/persistence adapter. PHP exceptions inherit their standard Throwable API and do not confer authority.
+Enum
+cases use stable strings. Factory failures never synthesize defaults. Bounds and initial clean-break decisions
+AC-001
 throughAC-007 in architecture.md apply to every relevant constructor even when historical source comments describe
 normalized logical counts.
 
@@ -1346,7 +1350,8 @@ attribute policies can layer on this base binding without turning registry loadi
 @since  0.1.0
 
 Public properties: `capability` (Kumwe\Access\Capability, readonly); `definitionVersion` (int, readonly); `id`
-(string, readonly); `installationGlobal` (bool, readonly); `lifecycle` (Kumwe\Access\AuthorizationDefinitionLifecycle,
+(string, readonly); `installationGlobal` (bool, readonly); `lifecycle`
+(Kumwe\Access\AuthorizationDefinitionLifecycle,
 readonly); `owner` (string, readonly); `systemIdentities` (array, readonly); `targets` (array, readonly); 
 
 ### `__construct(string $id, string $owner, Kumwe\Access\Capability $capability, iterable $targets, bool $installationGlobal, iterable $systemIdentities, Kumwe\Access\AuthorizationDefinitionLifecycle $lifecycle, int $definitionVersion)`

@@ -2,7 +2,8 @@
 
 ## 0.1.1
 
-- Advance the exact Access Context dependency to published 0.1.1 and replace obsolete draft/publication-blocker instructions with the observed release and explicit adoption requirements.
+- Advance the exact Access Context dependency to published 0.1.1 and replace obsolete draft/publication-blocker
+instructions with the observed release and explicit adoption requirements.
 - Refresh extraction handoff and library-owned validation evidence; App adoption remains a separate task.
 
 ## Unreleased
@@ -13,7 +14,8 @@
 ## 0.1.0
 
 - Unify PR and post-rebase release gates, dynamic release identity, tested publication retries,
-  and administrator setup across the package family. Preserve immutable release and dependency evidence requirements.
+  and administrator setup across the package family. Preserve immutable release and dependency evidence
+requirements.
 
 - Draft extraction of neutral authorization values, four-state decisions, scopes, owner-bound registries and ports.
 - Preserve numeric string identities; refuse raw control bytes and bounded iterable exhaustion.

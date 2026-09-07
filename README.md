@@ -3,7 +3,9 @@
 Portable authorization decisions, owner-bound capability/resource-policy registries, scope models and explicit host
 authority ports. Canonical PHP namespace: `Kumwe\Access\`.
 
-**Portable runtime is implemented and 0.1.0 is published.** This successor selects exact published `kumwe/access-context 0.1.1`. Package CI and release identity checks gate publication; independent verification gates App adoption. See [dependency state](docs/dependency-gate.md).
+**Portable runtime is implemented and 0.1.0 is published.** This successor selects exact published
+`kumwe/access-context 0.1.1`. Package CI and release identity checks gate publication; independent verification
+gates App adoption. See [dependency state](docs/dependency-gate.md).
 
 ```php
 use Kumwe\Access\AuthorizationDecision;
@@ -27,7 +29,8 @@ another owner's capability or declare system identities, and collide regardless 
 ownership makes orphan policy lookups inert.
 
 Requires PHP 8.5, Access Context and PSR Container 2. No native extension. See `CHARTER.md`, `docs/public-api.md`,
-`docs/architecture.md`, `docs/integration.md`, `docs/testing.md`, and `MIGRATION-HANDOFF.md` for exact ownership and
+`docs/architecture.md`, `docs/integration.md`, `docs/testing.md`, and `MIGRATION-HANDOFF.md` for exact ownership
+and
 future adoption.
 
 Run `composer install`, `composer check` and `composer examples`. CI also installs the built ZIP as a real
