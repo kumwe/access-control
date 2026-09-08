@@ -31,7 +31,7 @@ target:
   repository: "https://github.com/kumwe/access-control"
   artifact_identity: "kumwe/access-control"
   canonical_namespace_or_abi: "Kumwe\\Access"
-  branch: codex/extraction-readiness-20260907
+  branch: codex/integration-readiness-20260908
   pull_request: https://github.com/kumwe/access-control/pull/6
 ownership:
   responsibility: "Reusable authorization decisions, policies, scopes, ownership, registries and ports."
@@ -45,11 +45,11 @@ ownership:
   next_consumer: "kumwe/extension-sdk"
   public_manifests:
     - path: resources/public-api/v1.json
-      sha256: f202b449f5fa2d508fc8055bd959d57cc481a2ec1ce5370981ba0b70918ac4e1
+      sha256: 7ccd1fc48e4effd48df82a0b649336ccdc4cba37122977e977cbe4c99279655e
     - path: resources/capabilities/v1.json
-      sha256: beb94ed89c32a3f50719d3b9b0735bd13cb5403e61d12a19caf5178758372c1e
+      sha256: 64bc44385cf4a90cf60d59123424d2c5224d0eff7832070defc7fc0c58a3e237
     - path: resources/service-map/v1.json
-      sha256: c514f5b982627b8ec7027dfe51ed5d8521d8f3028ae2860df27ac9aafc97936a
+      sha256: 830928ca5a3dd5715026f4b481689407d05a59cd87879516f57ce4d7387e5a82
   intentionally_excluded:
     - "Eight Context types already have another package owner."
     - "Seven App authorization types retain authority/orchestration."
@@ -988,9 +988,9 @@ documentation:
   integration_or_consumer: "docs/integration.md"
   examples:
     - "examples/policies.php"
-  changelog_record: "CHANGELOG.md ## 0.1.1"
+  changelog_record: "CHANGELOG.md ## 0.1.2"
 release_expectations:
-  version_policy: "Successor 0.1.1 uses published Context 0.1.1; independent verification precedes App adoption."
+  version_policy: "Successor 0.1.2 uses published Context 0.1.2; independent verification precedes App adoption."
   expected_artifact_types:
     - "Composer package ZIP"
     - "GitHub source archive"
@@ -1178,6 +1178,11 @@ transaction atomicity, persistence, concurrency, recovery and delivery tests. Re
 implementation tests during the separate verified adoption.
 
 ## Next-task execution notes
+
+The selected runtime dependencies are kumwe/access-context 0.1.2.
+Access Context 0.1.2 was observed at source 132c3cd7c229ceda4398e19140d1477512c27ebf.
+Run the package dependency-readiness gate before selecting the coordinated consumer graph.
+Independent release attestations remain external and are not inferred from these version pins.
 
 Review [PR #6](https://github.com/kumwe/access-control/pull/6), require its complete package gate, then let the
 maintainer merge. Independently verify the published successor and exact dependency graph before App adoption.

@@ -10,7 +10,7 @@
   },
   "require": {
     "php": "^8.5",
-    "kumwe/access-context": "0.1.1",
+    "kumwe/access-context": "0.1.2",
     "psr/container": "^2.0"
   },
   "require-dev": {
@@ -46,6 +46,7 @@
     "test": "php tests/run.php",
     "check": [
       "@composer:validate",
+      "@dependencies:check",
       "@lint",
       "@lines",
       "@docs",
@@ -69,7 +70,11 @@
     "examples": "@php examples/policies.php",
     "release:integrity": "bash tools/test-release-integrity.sh",
     "test:ownership": "php tools/verify-test-ownership.php --self-test",
-    "container:smoke": "php resources/toolchain/service-manager-smoke.php"
+    "container:smoke": "php resources/toolchain/service-manager-smoke.php",
+    "dependencies:check": [
+      "bash tools/check-dependency-readiness.sh",
+      "bash tools/test-dependency-readiness.sh"
+    ]
   },
   "config": {
     "sort-packages": true

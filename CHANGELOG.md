@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.2
+
+- Select Access Context 0.1.2 so every consumer receives its malformed UTF-8 identity refusal.
+- Keep dependency-readiness coordinates synchronized with the exact production requirements.
+  Reject stale, missing, duplicate or mismatched evidence entries in the package gate.
+- Preserve package API ownership and require independent release verification before consumer adoption.
+
 ## 0.1.1
 
 - Advance the exact Access Context dependency to published 0.1.1 and replace obsolete draft/publication-blocker
