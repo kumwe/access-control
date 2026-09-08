@@ -1,7 +1,7 @@
 {
   "schema": "kumwe-package-capabilities/v1",
   "package": "kumwe/access-control",
-  "release": "0.1.1",
+  "release": "0.1.2",
   "namespace": "Kumwe\\Access\\",
   "responsibility": "Reusable authorization decision, policy, scope, ownership, registry and port semantics.",
   "non_responsibilities": [

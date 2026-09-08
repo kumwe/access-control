@@ -1,7 +1,7 @@
 {
   "schema": "kumwe-package-service-map/v1",
   "package": "kumwe/access-control",
-  "release": "0.1.1",
+  "release": "0.1.2",
   "config_provider": "Kumwe\\Access\\ConfigProvider",
   "provider_absence_reason": null,
   "factories": [
