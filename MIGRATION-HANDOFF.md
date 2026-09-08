@@ -32,7 +32,7 @@ target:
   artifact_identity: "kumwe/access-control"
   canonical_namespace_or_abi: "Kumwe\\Access"
   branch: codex/integration-readiness-20260908
-  pull_request: https://github.com/kumwe/access-control/pull/6
+  pull_request: https://github.com/kumwe/access-control/pull/7
 ownership:
   responsibility: "Reusable authorization decisions, policies, scopes, ownership, registries and ports."
   non_responsibilities:
@@ -1184,7 +1184,7 @@ Access Context 0.1.2 was observed at source 132c3cd7c229ceda4398e19140d1477512c2
 Run the package dependency-readiness gate before selecting the coordinated consumer graph.
 Independent release attestations remain external and are not inferred from these version pins.
 
-Review [PR #6](https://github.com/kumwe/access-control/pull/6), require its complete package gate, then let the
+Review [PR #7](https://github.com/kumwe/access-control/pull/7), require its complete package gate, then let the
 maintainer merge. Independently verify the published successor and exact dependency graph before App adoption.
 Existing published releases stay intact. This task does not implement the App runtime cutover.
 
