@@ -24,10 +24,10 @@ regressions, including the dependency identity fixtures. The release workflow re
 that gate after rebase and checks live dependency identities on the event's exact commit.
 PR head SHAs are never embedded as future dependency or package release identities.
 
-Version 2 distinguishes `package-implemented` from observed `package-released` and
+Release verification distinguishes `package-implemented` from observed `package-released` and
 independently established `release-verified`. Passing the publication check does not
 create independent evidence or resolve historical readiness gaps. Preserve the shipped
-handoff and obtain the separate verification needed for SDK or App adoption.
+release record and obtain the separate verification needed for SDK or App adoption.
 
 ## Optional strict evidence audit
 
@@ -75,7 +75,7 @@ adoption decisions separately from normal publication.
 ## Updating dependencies and reporting evidence
 
 For normal publication, select an exact published stable version, update Composer and
-the matching dependency versions in manifests, handoff and consumer checks, resolve again,
+the matching dependency versions in manifests, release record and consumer checks, resolve again,
 and run the full source gate and publication identity check. Preserve runtime behavior and
 clean no-dev registry/archive consumer verification; do not substitute a path repository.
 

@@ -1,9 +1,8 @@
 ---
-schema: kumwe-migration-handoff/v2
+schema: kumwe-package-release-record/v1
 artifact_kind: "framework_php"
 migration_id: "KUMWE-MIG-2026-009"
 change_set: "KUMWE-CS-2026-009"
-state: "draft_pr_open"
 source:
   app:
     repository: "https://github.com/kumwe/app"
@@ -21,18 +20,13 @@ source:
     capability_index_sha256: "87ded886f35f74878ca9eb8db4c36e23d681c4a49891f76dfc3210f385a7ce39"
   semantic_inputs: []
   examined_dependencies:
-    - "Access Context 0.1.0 source34241cbd0cc67934536d2921eca14b063be6fb81: exact executable development input, release-unverified."
+    - "Runtime dependency: kumwe/access-context 0.1.2; exact source identity is verified at installation/publication."
     - "SDK0.2.4 sourced0484b8733eaa57d076f567ffa5e997b9564b5fa: source provenance only, no runtime SDK dependency."
     - "Conversion and Producer do not own authorization decisions, policies or scopes."
-  active_related_pull_requests:
-    - "https://github.com/kumwe/access-context/pull/3"
-    - "https://github.com/kumwe/contribution/pull/2"
 target:
   repository: "https://github.com/kumwe/access-control"
   artifact_identity: "kumwe/access-control"
   canonical_namespace_or_abi: "Kumwe\\Access"
-  branch: codex/integration-readiness-20260908
-  pull_request: https://github.com/kumwe/access-control/pull/7
 ownership:
   responsibility: "Reusable authorization decisions, policies, scopes, ownership, registries and ports."
   non_responsibilities:
@@ -990,24 +984,22 @@ documentation:
     - "examples/policies.php"
   changelog_record: "CHANGELOG.md ## 0.1.2"
 release_expectations:
-  version_policy: "Successor 0.1.2 uses published Context 0.1.2; independent verification precedes App adoption."
+  version_policy: "SemVer; exact pre-1.0 dependency pins; independent source/archive verification precedes Core adoption."
   expected_artifact_types:
     - "Composer package ZIP"
     - "GitHub source archive"
   required_checks:
-    - "Access Context selected exact release must have passing independent external attestation."
-    - "Protected main before publication; exact stable published release reports immutable true."
+    - "Selected dependencies must pass stable publication and source/dist identity checks."
+    - "Stable published release, tag and Composer source/dist identities must agree."
     - "composer check on PHP 8.5"
     - "Archive installed as dependency in isolated no-dev authoritative consumer"
     - "Independent release/source/artifact/manifest/Packagist verification"
   required_registry_or_installer: "Packagist + Composer"
   required_external_attestation: true
-next_task:
-  phase_name: "Correct verified dependency prerequisite; package release/verification; separate SDK successor; App adoption later"
+consumer_contract:
   permitted_only_when:
-    - "Access Context dependency release verification passes before publication of this package."
-    - "Human-reviewed package immutable release receives independent passing external attestation."
-    - "Verified SDK successor owns canonical Capability before App adoption."
+    - "The selected release and dependencies pass independent source, archive and consumer verification."
+    - "Core and SDK consumers use the canonical Capability contract with compatible exact dependency pins."
   consumer_repository: "https://github.com/kumwe/extension-sdk"
   dependency_or_native_change: "Exact-pin verified Access Control and Contribution, retire SDK historical capability/owner model."
   namespace_or_api_replacements:
@@ -1108,93 +1100,56 @@ next_task:
   capability_index_changes:
     - "Regenerate after exact verified pins; remove old portable owners and duplicate class-unit tests together."
   changelog_and_evidence_changes:
-    - "MIG009/CS009/NRM011 enabling extraction only; no roadmap completion."
+    - "Record exact dependencies, independent release evidence and retained consumer integration validation."
   verification_commands:
     - "composer check"
     - "composer qa in App after later adoption"
     - "composer kumwe:capability-index-check"
     - "composer kumwe:core-growth-check"
-concurrency:
-  likely_conflict_files:
-    - "SDK composer.json"
-    - "SDK composer.lock"
-    - "SDK public API and contribution consumers"
-    - "App composer.json"
-    - "App composer.lock"
-    - "App src/Kernel/ContainerFactory.php"
-    - "App migration ledgers and capability index"
-  related_migrations:
-    - "KUMWE-MIG-2026-004"
-    - "KUMWE-MIG-2026-006"
-  ownership_conflicts:
-    - "Canonical SDK Capability transfer and Contribution adoption must be coordinated in SDK successor."
-  integration_train: null
-  resolution_rule: "semantic-preservation"
 governance:
-  roadmap_source_sha256: "a202155ef1a65f5ab293d4f8397ebf4ac430db7f1e877c776bbe7851e6fe18d8"
-  roadmap_refs: []
-  non_roadmap_refs:
-    - "NRM-2026-011"
   completion_claim: false
 decisions:
   - "AC-001 through AC-007: see docs/architecture.md."
-  - "43 public symbols include the later MembershipDirectory extraction; no App production edits."
-  - "This successor uses exact Context 0.1.1; publication and independent adoption verification remain distinct."
-blockers:
-  - "Independent verification of this successor and exact dependencies remains required before App adoption."
-  - "Published Access 0.1.0 remains intact; consumers advance only after this successor is actually published."
+  - "43 public symbols include MembershipDirectory; concrete membership resolution remains Core-owned."
+  - "Runtime requires exact Context 0.1.2; publication and independent consumer verification remain distinct."
+blockers: []
 ---
 
-## Migration/implementation summary
+# Access Control release record
 
-43 types; deterministic decision algebra, capability/policy ownership registries, scope/delegation and membership
-ports, three explicit factories. All existing ownership, collision, lifecycle removal, scope and container
-conformance suites stay in the library.
+## Package contract
+
+Portable decision algebra, capability/policy registries, scopes and authority ports. See [charter](../CHARTER.md).
 
 ## Public API and responsibility
 
-The symbol map above and [public API](docs/public-api.md) define every exported contract.
-[Architecture](docs/architecture.md) and [integration](docs/integration.md) retain the host boundaries.
+[Public API](public-api.md), [architecture](architecture.md) and [Core contract](core-contract.md) define ownership.
 
-## Capability reuse/semantic input review
+## Dependencies and semantic inputs
 
-This successor selects exact published Context 0.1.1. Its release must exist before consumers advance their Access
-requirement. [Current release/dependency observations](docs/readiness-review.md) supersede obsolete
-initial-extraction publication blockers. No independent attestation is fabricated.
+PHP 8.5, exact Access Context 0.1.2 and PSR Container 2. [Dependency verification](dependency-release-gate.md)
+distinguishes publication identity checks from independent release evidence.
 
-## Consumer inventory
+## Consumer contract
 
-The source/consumer mappings above remain the adoption inventory. The later MembershipDirectory extraction is
-recorded in docs/membership-source-map.json at App 24ecf956423c18933e824b43cea1bfb9127a79a9. Its canonical owner is
-Kumwe\Access\MembershipDirectory; retain the host DoctrineMembershipDirectory and live membership tests.
-Compare every mapped file and public signature
-against the recorded full App baseline and current App before consumer changes. Any newer portable behavior goes
-upstream first. Preserve App authority, adapters and workflows.
+The source and consumer inventories record explicit baselines for Core and SDK compatibility checks.
+[MembershipDirectory provenance](membership-source-map.json) retains its own source baseline and Core consumers.
 
 ## Test ownership
 
-Package tests own portable behavior, boundary/conformance, API and construction. App retains actual authorization,
-transaction atomicity, persistence, concurrency, recovery and delivery tests. Remove only duplicate portable
-implementation tests during the separate verified adoption.
+The package owns portable behavior, boundaries and conformance. Core retains authority, persistence, transactions,
+delivery and recovery tests. See [testing](testing.md).
 
-## Next-task execution notes
+## Consumer verification
 
-The selected runtime dependencies are kumwe/access-context 0.1.2.
-Access Context 0.1.2 was observed at source 132c3cd7c229ceda4398e19140d1477512c27ebf.
-Run the package dependency-readiness gate before selecting the coordinated consumer graph.
-Independent release attestations remain external and are not inferred from these version pins.
+Exact-pin independently verified compatible package versions and run the retained host and SDK integration suites.
 
-Review [PR #7](https://github.com/kumwe/access-control/pull/7), require its complete package gate, then let the
-maintainer merge. Independently verify the published successor and exact dependency graph before App adoption.
-Existing published releases stay intact. This task does not implement the App runtime cutover.
+## Compatibility and drift
 
-## Drift check
+Reconcile current consumer source with the recorded baselines before replacing imports or implementation tests.
+Host gateways, principal issuance, membership resolution, trust activation, persistence and audit remain host-owned.
 
-Reconcile mapped source and tests against the recorded App baseline and current App before any adoption.
-Newer portable behavior must move upstream first; preserve App authority, persistence and integration tests.
+## Validation
 
-## Validation recipe and observed local results
-
-Run `composer check` and the repository release automation regressions. Runtime suites, strict static analysis,
-coding standards, manifest/API checks and the no-dev authoritative archive consumer remain required. Final tested
-source and archive identities belong in external CI/attestation evidence.
+Run `composer check`, `composer examples` and release automation regressions. Hosted CI and independent
+attestations record actual tested source, archive and publication identities.

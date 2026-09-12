@@ -185,7 +185,7 @@ final class TestOwnership
         $host = self::object($data['host'] ?? null);
         self::text($host['repository'] ?? null);
         if (preg_match('/^[a-f0-9]{40}$/D', self::text($host['baseline'] ?? null)) !== 1) {
-            throw new RuntimeException('The host extraction baseline must be an exact source commit.');
+            throw new RuntimeException('The host source baseline must be an exact source commit.');
         }
         if (self::strings($host['retained_responsibilities'] ?? null) === []) {
             throw new RuntimeException('Retained host responsibility must be explicit.');

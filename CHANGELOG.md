@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Standardize linked package, CI, PHP and license badges with current installation and Core integration guidance.
+- Replace obsolete extraction process documents with a maintained release record and Core contract.
+- Update manifest and archive checks for the release record; retain source provenance and test ownership.
+
 ## 0.1.2
 
 - Select Access Context 0.1.2 so every consumer receives its malformed UTF-8 identity refusal.
@@ -13,7 +19,7 @@
 instructions with the observed release and explicit adoption requirements.
 - Refresh extraction handoff and library-owned validation evidence; App adoption remains a separate task.
 
-## Unreleased
+## Development history
 
 - Complete Access ownership of the portable MembershipDirectory port (NRM-2026-023).
 - Verify real Laminas ServiceManager resolution, shared lifetimes and missing-policy refusals in archive consumers.

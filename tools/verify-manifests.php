@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Prove the three package manifests, the changelog, the Composer metadata, the documentation and the handoff agree.
+ * Prove package manifests, changelog, Composer metadata, documentation and the release record agree.
  *
  * The public API manifest is generated from source by tools/verify-public-api.php; this tool holds the two
  * hand-written manifests and the surrounding records to it. Every capability names only exported symbols and
  * existing documents; the service map declares no provider and says why; every manifest carries the package
  * coordinate, the canonical namespace and the release the changelog records; every exported symbol and public
- * method is documented in docs/public-api.md; and, once MIGRATION-HANDOFF.md exists, its recorded manifest
+ * method is documented in docs/public-api.md; and, once docs/release-record.md exists, its recorded manifest
  * digests are the digests of the files beside it.
  *
  * @since  0.1.0
@@ -225,35 +225,38 @@ if ($serviceMap !== []) {
     }
 }
 
-$handoff = is_file($root . '/MIGRATION-HANDOFF.md') ? file_get_contents($root . '/MIGRATION-HANDOFF.md') : false;
-if ($handoff === false) {
-    $failures[] = 'MIGRATION-HANDOFF.md is required for release and App adoption.';
+$releaseRecord = is_file($root . '/docs/release-record.md')
+    ? file_get_contents($root . '/docs/release-record.md')
+    : false;
+if ($releaseRecord === false) {
+    $failures[] = 'docs/release-record.md is required for release and App adoption.';
 }
-if ($handoff !== false) {
-    if (!str_starts_with($handoff, "---\nschema: kumwe-migration-handoff/v2\n")) {
-        $failures[] = 'MIGRATION-HANDOFF.md must open with the kumwe-migration-handoff/v2 front matter.';
+if ($releaseRecord !== false) {
+    if (!str_starts_with($releaseRecord, "---\nschema: kumwe-package-release-record/v1\n")) {
+        $failures[] = 'docs/release-record.md must open with the kumwe-package-release-record/v1 front matter.';
     }
-    $pullRequest = '/^  pull_request: "?https:\/\/github\.com\/kumwe\/access-control\/pull\/[0-9]+"?$/m';
-    if (preg_match($pullRequest, $handoff) !== 1) {
-        $failures[] = 'MIGRATION-HANDOFF.md must cite the exact package pull request URL.';
-    }
-    preg_match_all('/^    - path: (\S+)\n      sha256: "?([a-f0-9]{64})"?$/m', $handoff, $recorded, PREG_SET_ORDER);
+    preg_match_all(
+        '/^    - path: (\S+)\n      sha256: "?([a-f0-9]{64})"?$/m',
+        $releaseRecord,
+        $recorded,
+        PREG_SET_ORDER,
+    );
     $recordedPaths = [];
     foreach ($recorded as [, $path, $digest]) {
         $recordedPaths[$path] = true;
         $actual = is_file($root . '/' . $path) ? hash_file('sha256', $root . '/' . $path) : null;
         if ($actual !== $digest) {
-            $failures[] = "MIGRATION-HANDOFF.md records a stale digest for {$path}.";
+            $failures[] = "docs/release-record.md records a stale digest for {$path}.";
         }
     }
     foreach (array_keys($expectedSchemas) as $path) {
         if (!isset($recordedPaths[$path])) {
-            $failures[] = "MIGRATION-HANDOFF.md records no digest for {$path}.";
+            $failures[] = "docs/release-record.md records no digest for {$path}.";
         }
     }
     $record = '/^  changelog_record: "CHANGELOG\.md ## ' . preg_quote((string) $release, '/') . '"$/m';
-    if (preg_match($record, $handoff) !== 1) {
-        $failures[] = "MIGRATION-HANDOFF.md must cite the changelog record for release {$release}.";
+    if (preg_match($record, $releaseRecord) !== 1) {
+        $failures[] = "docs/release-record.md must cite the changelog record for release {$release}.";
     }
 }
 
@@ -270,5 +273,5 @@ printf(
     count($symbols),
     count($ids),
     (string) $release,
-    $handoff === false ? '' : ', handoff digests current',
+    $releaseRecord === false ? '' : ', release record digests current',
 );

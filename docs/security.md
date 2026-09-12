@@ -10,7 +10,6 @@ available. Do not publish credentials or private tenant payloads. CI runs Compos
 architecture/API and hostile-input tests. A passing package suite does not certify host authentication, trust or
 persistence adapters.
 
-SemVer applies to proposed public APIs after release. Pre-1.0 Kumwe dependencies are exact pins; the draft uses
-exact published Context 0.1.1 in this successor. Clean-break decisions AC-001 through 007 are explicit
-initial-release
-changes; no historical aliases, fallbacks or dual runtime owners are provided.
+SemVer applies to the public API. Pre-1.0 Kumwe dependencies are exact pins; the package requires Access Context
+0.1.2. Compatibility decisions AC-001 through AC-008 are documented in [architecture](architecture.md).
+Host authority and portable mechanisms have separate canonical owners.
