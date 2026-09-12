@@ -1,7 +1,7 @@
 * text=auto eol=lf
 
 # The release archive ships everything the App adoption gate reads: the charter, README, changelog,
-# handoff, docs/, examples/, resources/ and src/. Only development-lane files are excluded.
+# docs/, examples/, resources/ and src/. Only development-lane files are excluded.
 /.github export-ignore
 /tests export-ignore
 /tools export-ignore

@@ -1,16 +1,13 @@
 # Architecture and versioned decisions
 
-The source closure starts with 35 existing portable or separable types: 33 App authorization types, App GrantScope and
-SDK Capability. A second Identity AuthorizationDecision merges into one canonical model. Seven additional types make
-42 exports: DecisionState, DecisionCombiner, MembershipRequirement, ConfigProvider and three factories. The manifest
-freezes every public method and property.
+The package exports 43 types: decision algebra, capability/resource-policy registries, scopes, membership and
+ownership ports, ConfigProvider and three factories. The public API manifest records every exported method and property.
 
-Only Access Context 0.1.0 (unverified development input) and PSR Container 2 are required. The architecture gate
-closes the exact 42-type allow-list, rejects App/SDK/framework/persistence dependencies and runtime selection, and
-permits PSR Container only in factories. Context values remain explicit inputs; no context is ambient or retained by
-service configuration.
+Runtime dependencies are exact Access Context 0.1.2 and PSR Container 2. The architecture gate rejects Core/SDK,
+framework and persistence dependencies and permits PSR Container only in factories. Context values remain explicit
+inputs; no context is ambient or retained by service configuration.
 
-## Versioned clean breaks
+## Versioned compatibility decisions
 
 - **AC-001 / 0.1.0:** one four-state decision replaces both boolean models. Only Allow produces allowed=true. Deny >
   StepUp > Allow > NotApplicable. Ties compare policy then reason as bytes. Empty input abstains with
@@ -42,14 +39,9 @@ generation. Rebuild that generation on lifecycle changes; no cross-process synch
 guarantee is provided by the in-memory registries. Ownership equality intentionally compares level/id, not current
 membership snapshot.
 
-## AC-008: Membership directory ownership completion
+## AC-008: Membership directory ownership
 
-The v2 catalog assigns MembershipDirectory to Access. Source closure at App master
-was rechecked: it extends MembershipContextValidator and refers only to membership
-and site Context values. Move the exact port to Kumwe\Access without a default
-implementation. This is additive ownership completion, not a new authority model.
-DoctrineMembershipDirectory, authentication, current membership storage, lock scope
-and credential selection remain App responsibilities. Approval imports this port;
-it must not redeclare it. Consumers of the original App port move only after a
-verified Access successor is available. The original extraction baseline remains
-recorded; this addition has its own source and consumer inventory.
+`Kumwe\Access\MembershipDirectory` extends MembershipContextValidator using membership and site Context values.
+It has no default implementation. DoctrineMembershipDirectory, authentication, current membership storage, lock
+scope and credential selection remain Core responsibilities. Approval consumes this port.
+The [membership source map](membership-source-map.json) records its baseline and consumers for compatibility checks.

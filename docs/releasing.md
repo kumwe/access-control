@@ -20,7 +20,7 @@ Access Control requires an exact stable published Access Context release. After 
 production Composer install, normal publication runs
 `bash tools/check-package-dependencies.sh` to validate the resolved version against
 the published upstream release/tag and Composer source/dist identities before tag
-mutation. Update the exact Composer, handoff, manifest and consumer tuple together,
+mutation. Update the exact Composer, release record, manifest and consumer tuple together,
 then rerun the complete package and clean-consumer gates.
 
 [Dependency release verification](dependency-release-gate.md) describes the separate
@@ -28,19 +28,19 @@ optional strict audit, `bash tools/check-release-dependencies.sh`, including pla
 immutability and authentic external attestations. Those checks are not required for
 normal publication. Preserve unresolved verification evidence until it is actually
 obtained; never invent attestations. The package's post-publication attestation and
-shipped handoff remain prerequisites for declaring `release-verified` or SDK/App
+shipped release record remain prerequisites for declaring `release-verified` or SDK/App
 adoption.
 
 ## Publication evidence and recovery
 
-The maintainer performs the initial Packagist submission. Its GitHub integration
-then follows tags without a registry credential in CI. Confirm `package-released`
+The package is registered on Packagist. Its GitHub integration follows tags without a registry credential in CI.
+ Confirm `package-released`
 from the successful default-branch publication run and matching published stable
 release, tag and source identity. Publication does not establish `release-verified`.
 Before declaring that state or SDK/App adoption, a fresh independent verifier must
 bind the exact published source/tag, archive digest, manifests, registry coordinate,
 license/security and clean-consumer results in an external RELEASE-ATTESTATION.yaml.
-The artifact and handoff must not invent their own final commit, checksum or
+The artifact and release record must not invent their own final commit, checksum or
 publication evidence. This attestation is separate from normal publication.
 
 Use the current release workflow on the default branch to retry after correcting

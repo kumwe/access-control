@@ -4,7 +4,7 @@
  * Refuse any committed line wider than 120 columns and any machine path or timestamp in a committed artifact.
  *
  * Every file the repository tracks is scanned, not only PHP: documentation, manifests, workflows and the
- * handoff are read by people and by the App's adoption gate at the same width. The machine-path rule keeps a
+ * release record are read by people and by the App's adoption gate at the same width. The machine-path rule keeps a
  * sandbox path or a scratch directory from leaking into a released artifact.
  *
  * @since  0.1.0
@@ -43,7 +43,7 @@ foreach ($iterator as $file) {
     }
     $frontMatter = false;
     foreach ($lines as $index => $line) {
-        if ($relative === 'MIGRATION-HANDOFF.md' && $line === '---') {
+        if ($relative === 'docs/release-record.md' && $line === '---') {
             $frontMatter = !$frontMatter;
         }
         $structured = str_ends_with($relative, '.json') || $frontMatter

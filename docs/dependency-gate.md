@@ -1,14 +1,13 @@
-# Dependency state
+# Dependency contract
 
-Access Context 0.1.1 is published at `cb6aefd575401192b83700d2d06c739e2a39285f`; this successor requires that exact
-stable version. Access Control 0.1.0 was published at `54dbaa1dbffeb09ba390a5e75e8adc951c437a41` with Context
-0.1.0. Existing tags and release identities remain unchanged.
+The runtime requires exact `kumwe/access-context 0.1.2` and `psr/container ^2.0`. Composer metadata is authoritative;
+release-readiness coordinates and the consumer archive gate must agree with the selected graph.
 
-Publication checks the tested source, package gates and exact stable dependency tag/source/dist identity. The
-separate strict audit and independent release attestation determine App adoption readiness. No passing external
-attestation is asserted here.
+`composer dependencies:check` rejects stale, missing, duplicate or mismatched dependency evidence entries.
+Normal publication verifies stable dependency release/tag and Composer source/dist identities. Independent
+verification additionally binds source/archive/manifest and clean-consumer evidence before Core or SDK adoption.
+See [dependency release verification](dependency-release-gate.md) for both checks.
 
-The published Approval 0.1.0 graph still requires Access 0.1.0 and Context 0.1.0. Its successor must retain that
-coherent graph until compatible Access and Audit successors have actually been published and verified, then update
-all three exact requirements together through Composer. Do not substitute `latest`, `dev-main`, wildcard
-requirements or a guessed future release.
+Consumers select compatible exact Kumwe versions together, resolve their lockfile and validate actual integration
+suites. Existing published tags and archives remain unchanged. A recorded version alone does not establish passing
+external release attestation or successful consumer integration.

@@ -1,8 +1,8 @@
 # Public API
 
 This document inventories every public type and member. Parameters and return shapes below are exact PHP contracts;
-the corresponding source PHPDoc states invariants, exceptions and side effects. The published API and this
-successor are distinguished in MIGRATION-HANDOFF.md.
+the corresponding source PHPDoc states invariants, exceptions and side effects. The
+[release record](release-record.md) binds public manifests and Core compatibility requirements.
 
 Values are final/readonly unless explicitly mutable; no value performs I/O or starts a transaction. Registries
 retain
